@@ -71,9 +71,9 @@ export default function ProjectCard({ project, videoDelay = 0 }: { project: Proj
 
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">
-          {project.tags.map((tag) => (
+          {project.tags.map((tag, i) => (
             <span
-              key={tag}
+              key={`${tag}-${i}`}
               className="text-[10px] font-body px-2.5 py-1 rounded-full bg-white/4 text-lux-muted border border-white/8"
             >
               {tag}

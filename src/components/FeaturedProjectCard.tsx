@@ -90,9 +90,9 @@ export default function FeaturedProjectCard({ project, videoDelay = 0 }: { proje
 
           {/* Tags */}
           <div className="flex flex-wrap gap-1.5">
-            {project.tags.map((tag) => (
+            {project.tags.map((tag, i) => (
               <span
-                key={tag}
+                key={`${tag}-${i}`}
                 className="text-xs font-body px-2.5 py-1 rounded-full bg-white/4 text-lux-cream-dim/60 border border-white/8"
               >
                 {tag}
