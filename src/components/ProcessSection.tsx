@@ -26,7 +26,9 @@ export default function ProcessSection() {
         </motion.div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/6 rounded-2xl overflow-hidden">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4
+                        [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
+                        lg:grid lg:grid-cols-4 lg:gap-px lg:bg-white/6 lg:rounded-2xl lg:overflow-hidden lg:pb-0">
           {processSteps.map(({ number, title, description }, i) => (
             <motion.div
               key={number}
@@ -34,7 +36,7 @@ export default function ProcessSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative p-6 md:p-8 bg-lux-black hover:bg-lux-dark/70 transition-colors duration-300 group"
+              className="relative snap-start shrink-0 w-[78%] sm:w-[55%] rounded-2xl border border-white/8 p-6 bg-lux-black hover:bg-lux-dark/70 transition-colors duration-300 group lg:w-auto lg:rounded-none lg:border-0 lg:p-8"
             >
               {/* Step number */}
               <div className="font-display text-5xl font-bold text-gradient-gold mb-6 leading-none">

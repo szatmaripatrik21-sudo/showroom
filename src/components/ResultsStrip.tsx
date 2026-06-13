@@ -56,7 +56,7 @@ function StatTile({ stat, index }: { stat: Stat; index: number }) {
       viewport={{ once: true, margin: '-60px' }}
       onViewportEnter={() => setEntered(true)}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex flex-col card-luxury rounded-2xl p-7 md:p-8
+      className="relative flex flex-col card-luxury rounded-2xl p-4 lg:p-8
                  hover:border-lux-gold/30 transition-colors duration-300"
     >
       {/* Category badge */}
@@ -69,7 +69,7 @@ function StatTile({ stat, index }: { stat: Stat; index: number }) {
       </span>
 
       {/* Value — big serif gold */}
-      <p className="font-display text-4xl md:text-5xl font-semibold text-gradient-gold leading-none mb-4 pr-16">
+      <p className="font-display text-2xl sm:text-3xl lg:text-5xl font-semibold text-gradient-gold leading-tight lg:leading-none mb-2 lg:mb-4 pr-12 lg:pr-16">
         {displayValue}
       </p>
 
@@ -111,7 +111,7 @@ export default function ResultsStrip() {
         </motion.div>
 
         {/* 4-tile grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           {stats.map((stat, i) => (
             <StatTile key={stat.title} stat={stat} index={i} />
           ))}
