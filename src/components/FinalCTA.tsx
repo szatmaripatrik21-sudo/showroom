@@ -4,7 +4,7 @@ import { CalendarDays, ArrowUpRight } from 'lucide-react'
 
 export default function FinalCTA() {
   return (
-    <section id="kapcsolat" className="border-t border-white/6 py-20 md:py-40 relative overflow-hidden">
+    <section id="egyutt" className="border-t border-white/6 py-20 md:py-40 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[700px] h-[500px] rounded-full bg-lux-gold/4 blur-[140px]" />
@@ -31,20 +31,22 @@ export default function FinalCTA() {
           Kérdés, hogyan.
         </h2>
 
-        <p className="font-body text-sm md:text-base text-lux-muted leading-relaxed mb-8 max-w-2xl mx-auto">
+        <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed mb-8 max-w-2xl mx-auto">
           Ha vállalkozást vezetsz — bármilyen iparágban —, segítek olyan online jelenlétet
           építeni, ami prémiumabbnak mutatja a vállalkozásod, és könnyebbé teszi a megkeresést.
         </p>
 
         {/* Payoff line before CTA */}
-        <p className="font-display text-xl md:text-2xl text-lux-gold/70 italic mb-10 max-w-xl mx-auto leading-snug">
-          "A prémium megjelenés magasabb bizalmat és komolyabb érdeklődőket hozhat."
+        <p className="font-display text-xl md:text-2xl text-lux-gold/80 italic mb-10 max-w-xl mx-auto leading-snug">
+          „A prémium megjelenés magasabb bizalmat és komolyabb érdeklődőket hozhat."
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="gap-2.5">
-            <CalendarDays size={18} />
-            Kérek egy ajánlatot
+          <Button size="lg" className="gap-2.5" asChild>
+            <a href="#kapcsolat">
+              <CalendarDays size={18} />
+              Kérek weboldal-auditot
+            </a>
           </Button>
           <Button variant="outline" size="lg" className="gap-2.5" asChild>
             <a href="#munkak">
@@ -54,8 +56,8 @@ export default function FinalCTA() {
           </Button>
         </div>
 
-        <p className="mt-12 text-[11px] font-body text-lux-muted/40 tracking-wide">
-          Általában 24 órán belül válaszolok&nbsp; •&nbsp; Budapest&nbsp; •&nbsp; Konverzióra tervezve
+        <p className="mt-12 text-[11px] md:text-xs font-body text-lux-cream-dim/55 tracking-wide">
+          Nincs kötelezettség&nbsp; •&nbsp; Rövid válasz 24 órán belül&nbsp; •&nbsp; Egyértelmű következő lépés
         </p>
       </motion.div>
 

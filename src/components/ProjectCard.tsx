@@ -3,6 +3,7 @@ import { ArrowUpRight, ExternalLink } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import BrowserMockup from './BrowserMockup'
+import { useVideoBus } from '@/lib/videoBus'
 import type { Project, ProjectCategory } from '@/data/projects'
 import { categorySingular } from '@/data/projects'
 
@@ -13,24 +14,35 @@ const categoryVariant: Record<ProjectCategory, 'hospitality' | 'hotel' | 'beauty
   health: 'health',
 }
 
-export default function ProjectCard({ project, videoDelay = 0 }: { project: Project; videoDelay?: number }) {
+export default function ProjectCard({ project }: { project: Project }) {
+  const { activeId } = useVideoBus()
+  const isActive = activeId === project.id
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="group card-luxury rounded-2xl overflow-hidden hover:border-lux-gold/30 transition-all duration-400 hover:shadow-2xl hover:shadow-black/40 flex flex-col"
+      className={`group card-luxury rounded-2xl overflow-hidden transition-all duration-400 flex flex-col ${
+        isActive
+          ? 'ring-1 ring-lux-gold/55 shadow-[0_0_55px_-12px_rgba(201,168,76,0.45)]'
+          : 'hover:border-lux-gold/30 hover:shadow-2xl hover:shadow-black/40'
+      }`}
     >
-      {/* Browser preview */}
-      <div className="p-4 pb-0 flex-shrink-0">
+      {/* Browser preview — full-bleed on mobile, inset on larger cards */}
+      <div className="p-0 sm:p-2 sm:pb-0 flex-shrink-0">
         <BrowserMockup
           gradient={project.gradient}
           accentColor={project.accentColor}
           videoSrc={project.videoSrc}
           posterSrc={project.posterSrc}
-          videoDelay={videoDelay}
-          className="group-hover:scale-[1.01] transition-transform duration-500"
+          videoId={project.id}
+          mode="secondary"
+          projectName={project.name}
+          videoPosition={project.videoPosition}
+          videoFit={project.videoFit}
+          className="rounded-none border-0 sm:rounded-xl sm:border sm:border-white/8 group-hover:scale-[1.01] transition-transform duration-500"
         />
       </div>
 
@@ -53,19 +65,15 @@ export default function ProjectCard({ project, videoDelay = 0 }: { project: Proj
         </div>
 
         {/* Description */}
-        <p className="font-body text-sm text-lux-cream-dim/65 leading-relaxed">
+        <p className="font-body text-sm text-lux-cream-dim/80 leading-relaxed">
           {project.description}
         </p>
 
-        {/* Cél + Mit javít */}
-        <div className="space-y-2 py-3 border-t border-b border-white/6">
-          <div className="flex gap-2">
-            <span className="font-body text-[10px] tracking-wider uppercase text-lux-gold font-medium flex-shrink-0 mt-0.5">Cél</span>
-            <span className="font-body text-xs text-lux-muted leading-snug">{project.cel}</span>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-body text-[10px] tracking-wider uppercase text-lux-muted/60 font-medium flex-shrink-0 mt-0.5 whitespace-nowrap">Mit javít</span>
-            <span className="font-body text-xs text-lux-muted/70 leading-snug">{project.mitJavit}</span>
+        {/* Goal line */}
+        <div className="py-3 border-t border-b border-white/6">
+          <div className="flex gap-2 items-baseline">
+            <span className="font-body text-[10px] tracking-wider uppercase text-lux-gold font-semibold flex-shrink-0">Cél</span>
+            <span className="font-body text-xs text-lux-cream-dim/85 leading-snug">{project.cel}</span>
           </div>
         </div>
 
@@ -74,37 +82,32 @@ export default function ProjectCard({ project, videoDelay = 0 }: { project: Proj
           {project.tags.map((tag, i) => (
             <span
               key={`${tag}-${i}`}
-              className="text-[10px] font-body px-2.5 py-1 rounded-full bg-white/4 text-lux-muted border border-white/8"
+              className="text-[10px] font-body px-2.5 py-1 rounded-full bg-white/5 text-lux-cream-dim/75 border border-white/10"
             >
               {tag}
             </span>
           ))}
         </div>
 
-        {/* Actions */}
-        <div className="flex flex-col gap-2 pt-1 mt-auto">
+        {/* Actions — only real, working CTAs (no dead buttons) */}
+        <div className="flex flex-col gap-2.5 pt-1 mt-auto">
+          <Button size="sm" className="w-full gap-1.5 text-xs" asChild>
+            <a href="#kapcsolat">
+              Kérek hasonló oldalt
+              <ArrowUpRight size={13} />
+            </a>
+          </Button>
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full rounded-lg border border-lux-gold/40 px-4 py-2.5 font-body text-xs font-medium text-lux-gold hover:bg-lux-gold/8 hover:border-lux-gold/70 transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 w-full rounded-full border border-lux-cream/20 px-4 py-2.5 font-body text-xs font-medium text-lux-cream-dim hover:border-lux-gold/60 hover:text-lux-gold transition-all duration-200"
             >
               Weboldal megtekintése
               <ExternalLink size={12} />
             </a>
           )}
-          <div className="flex items-center gap-3">
-            <Button variant="gold" size="sm" className="flex-1 gap-1.5 text-xs">
-              Esettanulmány
-              <ArrowUpRight size={13} />
-            </Button>
-            {!project.liveUrl && (
-              <Button variant="ghost" size="sm" disabled className="opacity-25 text-xs cursor-not-allowed">
-                Hamarosan elérhető
-              </Button>
-            )}
-          </div>
         </div>
       </div>
     </motion.article>

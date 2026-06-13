@@ -3,6 +3,7 @@ import { ArrowUpRight, ExternalLink, Target, Layers, CheckCircle2 } from 'lucide
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import BrowserMockup from './BrowserMockup'
+import { useVideoBus } from '@/lib/videoBus'
 import type { Project, ProjectCategory } from '@/data/projects'
 import { categorySingular } from '@/data/projects'
 
@@ -13,7 +14,9 @@ const categoryVariant: Record<ProjectCategory, 'hospitality' | 'hotel' | 'beauty
   health: 'health',
 }
 
-export default function FeaturedProjectCard({ project, videoDelay = 0 }: { project: Project; videoDelay?: number }) {
+export default function FeaturedProjectCard({ project }: { project: Project }) {
+  const { activeId } = useVideoBus()
+  const isActive = activeId === project.id
   const cs = project.caseStudy
   const studyPoints = cs
     ? [
@@ -29,25 +32,32 @@ export default function FeaturedProjectCard({ project, videoDelay = 0 }: { proje
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="card-luxury rounded-2xl overflow-hidden border border-lux-gold/20"
+      className={`card-luxury rounded-2xl overflow-hidden border transition-all duration-500 ${
+        isActive
+          ? 'border-lux-gold/45 shadow-[0_0_70px_-16px_rgba(201,168,76,0.5)]'
+          : 'border-lux-gold/20'
+      }`}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-        {/* Left: large browser mockup */}
-        <div className="relative p-6 md:p-8 flex items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+        {/* Left: large browser mockup — 3/5 of the card so the video dominates */}
+        <div className="relative p-0 sm:p-3 md:p-4 flex items-center lg:col-span-3">
           <div className="absolute -inset-2 bg-gradient-to-br from-lux-gold/6 to-lux-orange/4 blur-3xl pointer-events-none" />
           <BrowserMockup
             gradient={project.gradient}
             accentColor={project.accentColor}
-            contentHeight="h-72"
-            className="relative z-10 w-full"
+            className="relative z-10 w-full rounded-none border-0 sm:rounded-xl sm:border sm:border-white/8"
             videoSrc={project.videoSrc}
             posterSrc={project.posterSrc}
-            videoDelay={videoDelay}
+            videoId={project.id}
+            mode="featured"
+            projectName={project.name}
+            videoPosition={project.videoPosition}
+            videoFit={project.videoFit}
           />
         </div>
 
         {/* Right: case-study content */}
-        <div className="p-6 md:p-8 flex flex-col justify-center space-y-5">
+        <div className="p-6 md:p-8 flex flex-col justify-center space-y-5 lg:col-span-2">
 
           {/* Header */}
           <div>
@@ -100,24 +110,22 @@ export default function FeaturedProjectCard({ project, videoDelay = 0 }: { proje
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-3 pt-1">
-            <Button variant="gold" size="sm" className="gap-1.5 text-xs">
-              Esettanulmány
-              <ArrowUpRight size={13} />
-            </Button>
-            {project.liveUrl ? (
-              <Button variant="ghost" size="sm" asChild className="text-xs">
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="gap-1.5">
-                  Weboldal
+          {/* Actions — the case study is shown inline above; CTAs are real links */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+            {project.liveUrl && (
+              <Button size="sm" asChild className="gap-1.5 text-xs">
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                  Weboldal megtekintése
                   <ExternalLink size={12} />
                 </a>
               </Button>
-            ) : (
-              <Button variant="ghost" size="sm" disabled className="opacity-25 text-xs cursor-not-allowed">
-                Weboldal
-              </Button>
             )}
+            <Button variant="gold" size="sm" asChild className="gap-1.5 text-xs">
+              <a href="#kapcsolat">
+                Kérek egy ajánlatot
+                <ArrowUpRight size={13} />
+              </a>
+            </Button>
           </div>
 
         </div>

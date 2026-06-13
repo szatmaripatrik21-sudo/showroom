@@ -1,24 +1,6 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
-
-const solutionPoints = [
-  {
-    title: 'Egyértelmű ajánlat',
-    description: 'A látogató azonnal érti, mit kap — és mit tegyen, ha érdekli.',
-  },
-  {
-    title: 'Gyors mobilélmény',
-    description: 'Telefonon is tökéletes — ahol az ügyfeleid többsége keres.',
-  },
-  {
-    title: 'Bizalomépítő szerkezet',
-    description: 'Vélemények, referenciák, fotók — minden, ami meggyőzi a bizonytalan látogatót.',
-  },
-  {
-    title: 'Prémium márkaérzet',
-    description: 'Az oldal tükrözze azt a minőséget, amit a vállalkozásod nyújt.',
-  },
-]
+import { solutionPoints } from '@/data/content'
 
 export default function SolutionSection() {
   return (
@@ -45,35 +27,35 @@ export default function SolutionSection() {
             A weboldalad nem dísz. Értékesítési felület.
           </p>
 
-          <p className="font-body text-sm md:text-base text-lux-muted leading-relaxed mb-8">
-            Minden weboldal, amit készítek, arra épül, hogy a látogatóból ügyfél legyen — nem hogy valaki
-            csak megnézze az oldalad, hanem hogy vásároljon, érdeklődjön, vagy felvegye veled a kapcsolatot.
+          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed mb-8">
+            Minden weboldal, amit készítek, arra épül, hogy a látogatóból ügyfél legyen — ne csak nézelődő.
+            Az oldaladnak bizalmat kell építenie, választ kell adnia, és könnyűvé kell tennie a kapcsolatfelvételt.
           </p>
 
           {/* Journey line */}
           <div className="flex items-center gap-3 mb-6">
             <div className="w-5 h-px bg-lux-gold/40 flex-shrink-0" />
-            <span className="font-body text-xs text-lux-muted/80 tracking-wide">
-              A látogatót végigvezetjük: hangulat&nbsp;→&nbsp;ajánlat&nbsp;→&nbsp;bizalom&nbsp;→&nbsp;döntés.
+            <span className="font-body text-xs text-lux-cream-dim/70 tracking-wide">
+              A látogatót végigvezetem: hangulat&nbsp;→&nbsp;ajánlat&nbsp;→&nbsp;bizalom&nbsp;→&nbsp;döntés.
             </span>
           </div>
 
-          {/* Cost-of-inaction beat (salvaged from the removed ProblemSection) */}
-          <p className="font-display text-xl md:text-2xl text-lux-cream/85 leading-snug">
+          {/* Cost-of-inaction beat */}
+          <p className="font-display text-xl md:text-2xl text-lux-cream/90 leading-snug">
             Ha a weboldalad nem győz meg, a látogató máshol köt ki.
           </p>
         </motion.div>
 
         {/* Solution grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {solutionPoints.map(({ title, description }, i) => (
             <motion.div
               key={title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group flex gap-4 p-6 rounded-xl border border-white/6 hover:border-lux-gold/25 transition-colors duration-300 bg-lux-black/40"
+              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="group flex gap-4 p-6 rounded-xl border border-white/8 hover:border-lux-gold/30 transition-colors duration-300 bg-lux-black/40"
             >
               <CheckCircle2
                 size={18}
@@ -81,7 +63,7 @@ export default function SolutionSection() {
               />
               <div>
                 <h3 className="font-display text-lg font-semibold text-lux-cream mb-1.5">{title}</h3>
-                <p className="font-body text-sm text-lux-muted leading-relaxed">{description}</p>
+                <p className="font-body text-sm text-lux-cream-dim/80 leading-relaxed">{description}</p>
               </div>
             </motion.div>
           ))}

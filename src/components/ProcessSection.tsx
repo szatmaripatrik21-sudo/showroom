@@ -14,13 +14,14 @@ export default function ProcessSection() {
           className="max-w-2xl mb-14 md:mb-20"
         >
           <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
-            Így működik
+            Folyamat
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight mb-5">
             Így készül el a weboldalad.
           </h2>
-          <p className="font-body text-sm md:text-base text-lux-muted leading-relaxed">
-            Egyszerű, átlátható folyamat — meglepetés nélkül. A cél, hogy az átadáskor pontosan azt kapd, amit elterveztünk.
+          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed">
+            Átlátható folyamat, felesleges körök nélkül. Először megértjük az üzleti célt, utána épül rá a
+            struktúra, a design és a technikai megvalósítás.
           </p>
         </motion.div>
 
@@ -50,7 +51,7 @@ export default function ProcessSection() {
               <h3 className="font-display text-xl font-semibold text-lux-cream mb-3 leading-tight">
                 {title}
               </h3>
-              <p className="font-body text-sm text-lux-muted leading-relaxed">
+              <p className="font-body text-sm text-lux-cream-dim/80 leading-relaxed">
                 {description}
               </p>
             </motion.div>

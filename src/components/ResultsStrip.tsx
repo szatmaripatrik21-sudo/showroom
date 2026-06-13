@@ -1,54 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-
-// ─── Edit these once you have real client data ────────────────────────────────
-// Set countTarget to a number to enable the count-up animation.
-// Remove countTarget and change value to the display string for text/ratio values.
-interface ResultMetric {
-  value: string        // {nagy szám} — displayed as-is when countTarget is absent (use bracket placeholders)
-  prefix?: string      // prepended before the count number (e.g. "+")
-  suffix?: string      // appended after the count number (e.g. "%", " nap")
-  countTarget?: number // when set, drives the count-up animation; leave undefined for placeholders
-  label: string        // {rövid kontextus} — bold label below the number
-  sublabel: string     // muted one-liner
-  source: string       // {forrás / projekt} — where this number comes from (bracket until real)
-}
-
-// Toggle ON once any number above is representative rather than from one specific project.
-const SHOW_REPRESENTATIVE_NOTE = false
-
-const resultMetrics: ResultMetric[] = [
-  {
-    value: '[+X%]',
-    label: 'több megkeresés',
-    sublabel: 'átadást követő első időszakban',
-    source: '[mérés forrása / projekt neve]',
-  },
-  {
-    value: '[2.1s → 0.9s]',
-    label: 'betöltési idő',
-    sublabel: 'teljesítményoptimalizálás után',
-    source: '[mérés forrása / projekt neve]',
-  },
-  {
-    value: '[X]',
-    suffix: '+',
-    label: 'elkészült weboldal',
-    sublabel: '[iparágak / projektek]',
-    source: '[mérés forrása / projekt neve]',
-  },
-  {
-    value: '[X]',
-    suffix: ' nap',
-    label: 'átlagos átadási idő',
-    sublabel: 'az első megbeszéléstől az éles indulásig',
-    source: '[mérés forrása / projekt neve]',
-  },
-]
-// ─────────────────────────────────────────────────────────────────────────────
+import { stats } from '@/data/content'
+import type { Stat } from '@/data/content'
 
 // Small count-up hook — fires once on inView, respects prefers-reduced-motion.
-// Returns 0 (and stays 0) when target is undefined (placeholder mode).
 function useCountUp(target: number | undefined, shouldStart: boolean): number {
   const [count, setCount] = useState(0)
   const startedRef = useRef(false)
@@ -62,8 +17,10 @@ function useCountUp(target: number | undefined, shouldStart: boolean): number {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (reducedMotion) {
-      setCount(target)
-      return
+      // Snap to the final value on the next frame (avoids a synchronous
+      // setState inside the effect body) — no animation for reduced motion.
+      const id = requestAnimationFrame(() => setCount(target))
+      return () => cancelAnimationFrame(id)
     }
 
     const duration = 1400
@@ -85,15 +42,12 @@ function useCountUp(target: number | undefined, shouldStart: boolean): number {
   return count
 }
 
-function MetricTile({ metric, index }: { metric: ResultMetric; index: number }) {
+function StatTile({ stat, index }: { stat: Stat; index: number }) {
   const [entered, setEntered] = useState(false)
-  const count = useCountUp(metric.countTarget, entered)
-  const isPlaceholder = metric.value.startsWith('[')
+  const count = useCountUp(stat.countTo, entered)
 
   const displayValue =
-    metric.countTarget !== undefined
-      ? `${metric.prefix ?? ''}${count}${metric.suffix ?? ''}`
-      : metric.value
+    stat.countTo !== undefined ? `${count}${stat.suffix ?? ''}` : stat.value
 
   return (
     <motion.div
@@ -105,37 +59,28 @@ function MetricTile({ metric, index }: { metric: ResultMetric; index: number }) 
       className="relative flex flex-col card-luxury rounded-2xl p-7 md:p-8
                  hover:border-lux-gold/30 transition-colors duration-300"
     >
-      {/* Kitöltendő badge — remove once real value is in */}
-      {isPlaceholder && (
-        <span
-          aria-label="Kitöltendő adat"
-          className="absolute top-4 right-4 text-[9px] font-body font-medium tracking-[0.2em]
-                     uppercase text-lux-orange/70 border border-lux-orange/25 rounded-full
-                     px-2.5 py-0.5 select-none"
-        >
-          Kitöltendő
-        </span>
-      )}
+      {/* Category badge */}
+      <span
+        className="absolute top-4 right-4 text-[9px] font-body font-medium tracking-[0.2em]
+                   uppercase text-lux-gold/80 border border-lux-gold/30 rounded-full
+                   px-2.5 py-0.5 select-none"
+      >
+        {stat.badge}
+      </span>
 
       {/* Value — big serif gold */}
-      <p className="font-display text-5xl md:text-6xl font-semibold text-gradient-gold leading-none mb-4">
+      <p className="font-display text-4xl md:text-5xl font-semibold text-gradient-gold leading-none mb-4 pr-16">
         {displayValue}
       </p>
 
-      {/* Label */}
-      <p className="font-body text-sm font-medium text-lux-cream mb-1 leading-snug">
-        {metric.label}
+      {/* Title */}
+      <p className="font-body text-sm font-semibold text-lux-cream mb-2 leading-snug">
+        {stat.title}
       </p>
 
-      {/* Sublabel */}
-      <p className="font-body text-xs text-lux-muted/70 leading-relaxed mb-4">
-        {metric.sublabel}
-      </p>
-
-      {/* Source / project — pushed to the bottom of the tile */}
-      <p className="mt-auto pt-3 border-t border-white/6 font-body text-[10px] text-lux-muted/50 tracking-wide leading-snug">
-        {metric.source}
-        {SHOW_REPRESENTATIVE_NOTE && <span className="text-lux-orange/50"> *</span>}
+      {/* Text */}
+      <p className="font-body text-xs text-lux-cream-dim/75 leading-relaxed">
+        {stat.text}
       </p>
     </motion.div>
   )
@@ -157,31 +102,30 @@ export default function ResultsStrip() {
             Számokban
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight mb-4">
-            Eredmények, amik számítanak.
+            A számok, amikre figyelek.
           </h2>
-          <p className="font-body text-sm md:text-base text-lux-muted leading-relaxed">
-            Minden szám valós ügyfélmunkából kerül be — a struktúra és a mérési logika már a helyén van.
+          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed">
+            Minden szép weboldal mögött mérhető szempontoknak kell állniuk. Nem az a cél, hogy az oldal csak
+            jól nézzen ki, hanem hogy gyors, átlátható és üzletszerzésre alkalmas legyen.
           </p>
         </motion.div>
 
         {/* 4-tile grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-          {resultMetrics.map((metric, i) => (
-            <MetricTile key={metric.label} metric={metric} index={i} />
+          {stats.map((stat, i) => (
+            <StatTile key={stat.title} stat={stat} index={i} />
           ))}
         </div>
 
-        {/* Truth disclaimer */}
+        {/* Honest framing — these reflect process & performance targets, not client results */}
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-10 text-[10px] font-body text-lux-muted/40 tracking-wide text-center"
+          className="mt-10 text-[11px] font-body text-lux-cream-dim/45 tracking-wide text-center"
         >
-          {SHOW_REPRESENTATIVE_NOTE
-            ? '[* Reprezentatív / korábbi projekt adatai]'
-            : 'A fenti adatok valós ügyféladat alapján kerülnek kitöltésre — nem becsült vagy fiktív értékek.'}
+          A fenti értékek fejlesztési folyamat- és teljesítménymérési szempontokat tükröznek — nem fiktív ügyféleredmények.
         </motion.p>
       </div>
     </section>

@@ -17,9 +17,9 @@ export default function HeroSection() {
 
       {/* Dark overlays for text readability */}
       {/* Layer 1: main top-to-bottom gradient */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/20 to-black/85" />
-      {/* Layer 2: left vignette for copy readability */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/65 via-transparent to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/30 to-black/90" />
+      {/* Layer 2: left vignette for copy readability — tames bright streaks crossing the headline */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
       {/* Layer 3: dedicated bottom bleed — makes value bar always readable */}
       <div className="absolute bottom-0 left-0 right-0 h-52 z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
@@ -46,11 +46,26 @@ export default function HeroSection() {
           </h1>
         </div>
 
-        {/* Subheadline */}
-        <p className="max-w-xl font-body text-sm md:text-base text-lux-cream-dim/75 leading-relaxed mb-10 animate-fade-in-up animation-delay-800">
-          Modern, gyors és értékesítésre épített weboldalakat készítek vállalkozásoknak, hogy a látogatókból
-          könnyebben legyen megkeresés, foglalás vagy vásárlás.
-        </p>
+        {/* Subheadline — wrapped with a localized dark readability scrim so the
+            bright shader streaks never wash out the copy. The scrim sits inside
+            the z-20 content context (above the animation, below the text). */}
+        <div className="relative max-w-xl mb-10">
+          {/* Text-safe zone: soft dark radial layer behind the paragraph only.
+              Stronger on mobile where streaks cross the copy, eased back on
+              desktop where the left vignette already helps. Blurred edges blend
+              naturally into the dark/gold theme. No layout impact. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-x-6 -inset-y-5 -z-10 rounded-[2rem] blur-2xl
+                       bg-[radial-gradient(ellipse_at_center,rgba(8,7,6,0.94)_0%,rgba(8,7,6,0.72)_45%,rgba(8,7,6,0)_80%)]
+                       md:-inset-x-4 md:-inset-y-4
+                       md:bg-[radial-gradient(ellipse_at_center,rgba(8,7,6,0.7)_0%,rgba(8,7,6,0.42)_48%,rgba(8,7,6,0)_82%)]"
+          />
+          <p className="font-body text-base md:text-lg text-lux-cream-dim/90 leading-relaxed animate-fade-in-up animation-delay-800">
+            Modern, gyors és értékesítésre épített weboldalakat készítek vállalkozásoknak, hogy a látogatóból
+            könnyebben legyen megkeresés, foglalás vagy vásárló.
+          </p>
+        </div>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-1000">
@@ -63,16 +78,9 @@ export default function HeroSection() {
         </div>
 
         {/* Micro-trust line — mirrors the line under the final CTA */}
-        <p className="mt-6 font-body text-xs text-zinc-300/60 tracking-wide animate-fade-in animation-delay-1000">
-          Átlagban 24 órán belül válaszolok&nbsp; •&nbsp; Budapest&nbsp; •&nbsp; Konverzióra tervezve
+        <p className="mt-6 font-body text-xs md:text-sm text-zinc-200/80 tracking-wide animate-fade-in animation-delay-1000">
+          Átlagban 24 órán belül válaszolok&nbsp; •&nbsp; Konverzióra tervezve&nbsp; •&nbsp; Mobilra optimalizálva
         </p>
-
-        {/* Positioning strip */}
-        <div className="mt-10 animate-fade-in animation-delay-1000">
-          <p className="inline-flex items-center gap-0 font-body text-xs text-zinc-300/70 tracking-[0.14em] uppercase">
-            Bármilyen iparág&nbsp; •&nbsp; Konverziófókusz&nbsp; •&nbsp; Prémium megjelenés
-          </p>
-        </div>
       </div>
 
       {/* Bottom bar — 3 value points */}

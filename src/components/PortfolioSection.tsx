@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 import FeaturedProjectCard from './FeaturedProjectCard'
+import { VideoBusProvider } from '@/lib/videoBus'
 import { projects, CATEGORIES } from '@/data/projects'
 import type { FilterId } from '@/data/projects'
 
@@ -15,7 +16,7 @@ export default function PortfolioSection() {
 
   return (
     <section id="munkak" className="border-t border-white/6 py-20 md:py-36">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -31,9 +32,9 @@ export default function PortfolioSection() {
             <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
               Iparágra szabott weboldal-koncepciók.
             </h2>
-            <p className="mt-4 font-body text-sm text-lux-muted max-w-xl leading-relaxed">
-              Ezek a tervek nem csak szépek. Arra épülnek, hogy a látogató gyorsabban megértse az ajánlatot,
-              megbízzon a vállalkozásban, és könnyebben vásároljon, foglaljon vagy érdeklődjön.
+            <p className="mt-4 font-body text-sm md:text-base text-lux-cream-dim/85 max-w-xl leading-relaxed">
+              Nem sablonokat mutatok, hanem üzleti helyzetekre épített weboldalakat: foglalásra,
+              ajánlatkérésre, bizalomépítésre és szolgáltatás-bemutatásra tervezve.
             </p>
           </div>
 
@@ -55,32 +56,34 @@ export default function PortfolioSection() {
           </div>
         </motion.div>
 
-        {/* Featured card + grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-6"
-          >
-            {featured && <FeaturedProjectCard project={featured} videoDelay={0} />}
+        {/* Featured card + grid — one shared playback bus: only one video at a time */}
+        <VideoBusProvider>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-6"
+            >
+              {featured && <FeaturedProjectCard project={featured} />}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {rest.map((project, i) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <ProjectCard project={project} videoDelay={(i + 1) * 1000} />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {rest.map((project, i) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <ProjectCard project={project} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </VideoBusProvider>
       </div>
     </section>
   )

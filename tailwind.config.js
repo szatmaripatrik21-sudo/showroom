@@ -14,8 +14,10 @@ export default {
         'lux-gold-dim': '#956f28',
         'lux-cream': '#f0ebe0',
         'lux-cream-dim': '#c8bfb0',
-        'lux-orange': '#c85d28',
-        'lux-muted': '#7a6e60',
+        'lux-orange': '#d06a32',
+        /* Lifted from #7a6e60 for legible body/sub copy on the near-black bg. */
+        'lux-muted': '#9c8f7d',
+        'lux-muted-soft': '#857a6b',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
