@@ -1,11 +1,15 @@
-import { motion } from 'framer-motion'
-import { CheckCircle2, Check, CalendarDays } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CheckCircle2, Check, CalendarDays, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { offer } from '@/data/content'
 
 export default function OfferBlock() {
   const { card } = offer
   const hasPrice = card.priceValue.trim().length > 0
+  // Mobile-only: the deliverables list collapses behind a real accordion so the
+  // price card sits near the top of the section. Desktop renders the full list.
+  const [includesOpen, setIncludesOpen] = useState(false)
 
   return (
     <section className="border-t border-white/6 py-20 md:py-36 bg-lux-dark">
@@ -39,24 +43,73 @@ export default function OfferBlock() {
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-cream-dim/70 block mb-6">
-              A csomag tartalma
-            </p>
-            <ul className="space-y-4">
-              {offer.includes.map((item, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.45, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex gap-3 items-start"
+            {/* Desktop (≥lg): static label + full list — unchanged from baseline */}
+            <div className="hidden lg:block">
+              <p className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-cream-dim/70 block mb-6">
+                A csomag tartalma
+              </p>
+              <ul className="space-y-4">
+                {offer.includes.map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex gap-3 items-start"
+                  >
+                    <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-lux-gold" aria-hidden="true" />
+                    <span className="font-body text-sm text-lux-cream/85 leading-relaxed">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Mobile (<lg): collapsed accordion — closed by default so the price
+                card stays near the top of the section. Real button + region. */}
+            <div className="lg:hidden">
+              <button
+                type="button"
+                aria-expanded={includesOpen}
+                aria-controls="csomag-panel"
+                onClick={() => setIncludesOpen((v) => !v)}
+                className="flex items-center justify-between gap-4 w-full text-left rounded-xl border border-white/10 bg-lux-black/40 px-5 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lux-gold/50"
+              >
+                <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-cream-dim/80">
+                  A csomag tartalma
+                </span>
+                <span
+                  className={`flex-shrink-0 w-7 h-7 rounded-full border border-lux-gold/30 flex items-center justify-center text-lux-gold transition-transform duration-300 motion-reduce:transition-none ${
+                    includesOpen ? 'rotate-45 bg-lux-gold/10' : ''
+                  }`}
+                  aria-hidden="true"
                 >
-                  <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-lux-gold" aria-hidden="true" />
-                  <span className="font-body text-sm text-lux-cream/85 leading-relaxed">{item}</span>
-                </motion.li>
-              ))}
-            </ul>
+                  <Plus size={15} />
+                </span>
+              </button>
+              <AnimatePresence initial={false}>
+                {includesOpen && (
+                  <motion.div
+                    id="csomag-panel"
+                    role="region"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="space-y-4 px-5 pt-5">
+                      {offer.includes.map((item, i) => (
+                        <li key={i} className="flex gap-3 items-start">
+                          <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-lux-gold" aria-hidden="true" />
+                          <span className="font-body text-sm text-lux-cream/85 leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
 
           {/* Right: pricing card */}

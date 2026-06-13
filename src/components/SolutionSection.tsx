@@ -2,6 +2,15 @@ import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import { solutionPoints } from '@/data/content'
 
+// On mobile we surface only the 3 strongest value cards — mapped to the
+// section's own ajánlat → bizalom → döntés journey. The other three stay in the
+// DOM but are hidden below `lg`, so desktop (≥1024px) keeps all six unchanged.
+const MOBILE_HIDDEN_SOLUTIONS = new Set([
+  'Gyors mobilélmény',
+  'Prémium márkaérzet',
+  'Könnyen kezelhető alap',
+])
+
 export default function SolutionSection() {
   return (
     <section className="border-t border-white/6 py-20 md:py-36 bg-lux-dark">
@@ -55,7 +64,9 @@ export default function SolutionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group flex gap-4 p-6 rounded-xl border border-white/8 hover:border-lux-gold/30 transition-colors duration-300 bg-lux-black/40"
+              className={`group ${
+                MOBILE_HIDDEN_SOLUTIONS.has(title) ? 'hidden lg:flex' : 'flex'
+              } gap-4 p-6 rounded-xl border border-white/8 hover:border-lux-gold/30 transition-colors duration-300 bg-lux-black/40`}
             >
               <CheckCircle2
                 size={18}
