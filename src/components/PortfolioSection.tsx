@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import ProjectCard from './ProjectCard'
+import ProjectCarousel from './ProjectCarousel'
 import FeaturedProjectCard from './FeaturedProjectCard'
 import { VideoBusProvider } from '@/lib/videoBus'
 import { projects, CATEGORIES } from '@/data/projects'
@@ -69,18 +69,9 @@ export default function PortfolioSection() {
             >
               {featured && <FeaturedProjectCard project={featured} />}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {rest.map((project, i) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
-              </div>
+              {/* Secondary cards: horizontal carousel below lg, original 2-col
+                  grid at lg+ (see ProjectCarousel — desktop layout unchanged). */}
+              <ProjectCarousel projects={rest} />
             </motion.div>
           </AnimatePresence>
         </VideoBusProvider>
