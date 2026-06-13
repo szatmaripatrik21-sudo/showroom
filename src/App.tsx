@@ -11,7 +11,6 @@ import OfferBlock from '@/components/OfferBlock'
 import ProcessSection from '@/components/ProcessSection'
 import FaqSection from '@/components/FaqSection'
 import ContactSection from '@/components/ContactSection'
-import FinalCTA from '@/components/FinalCTA'
 import Footer from '@/components/Footer'
 import MobileStickyBar from '@/components/MobileStickyBar'
 
@@ -49,10 +48,9 @@ export default function App() {
       {/* 9. FAQ */}
       <FaqSection />
 
-      {/* 10. Final CTA — emotional closer that drives down to the form */}
-      <FinalCTA />
-
-      {/* 11. Contact / quote form */}
+      {/* 10. Contact / quote form — the former standalone "Dolgozzunk együtt"
+          CTA (FinalCTA) is now baked into the top of this section. The
+          FinalCTA component file is kept but unimported pending sign-off. */}
       <ContactSection />
 
       <Footer />

@@ -71,9 +71,42 @@ export default function ContactSection() {
   return (
     <section id="kapcsolat" className="border-t border-white/6 py-20 md:py-36 bg-lux-dark scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
+        {/* Section header — relocated verbatim from the former standalone
+            "Dolgozzunk együtt" CTA (FinalCTA) so the two "let's start" moments
+            collapse into one. No copy rewritten; the previous Contact eyebrow/
+            headline/subcopy were dropped per the approved Phase-1 decision. */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-14 md:mb-16"
+        >
+          <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
+            Dolgozzunk együtt
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-semibold text-lux-cream leading-tight mb-5">
+            A weboldalad ma is hat{' '}
+            <span className="text-gradient-gold">a bevételedre.</span>
+            <br />
+            Kérdés, hogyan.
+          </h2>
+          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed mb-6 max-w-2xl">
+            Ha vállalkozást vezetsz — bármilyen iparágban —, segítek olyan online jelenlétet
+            építeni, ami prémiumabbnak mutatja a vállalkozásod, és könnyebbé teszi a megkeresést.
+          </p>
+          <p className="font-display text-xl md:text-2xl text-lux-gold/80 italic leading-snug mb-6 max-w-xl">
+            „A prémium megjelenés magasabb bizalmat és komolyabb érdeklődőket hozhat."
+          </p>
+          <p className="text-[11px] md:text-xs font-body text-lux-cream-dim/55 tracking-wide">
+            Nincs kötelezettség&nbsp; •&nbsp; Rövid válasz 24 órán belül&nbsp; •&nbsp; Egyértelmű következő lépés
+          </p>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-          {/* Left: intro */}
+          {/* Left: reassurances + mailto (headline/eyebrow/subcopy moved to the
+              section header above) */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,17 +114,6 @@ export default function ContactSection() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="lg:sticky lg:top-28"
           >
-            <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
-              Kapcsolat
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight mb-5">
-              Kérj ajánlatot egy jobb weboldalra.
-            </h2>
-            <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed mb-8 max-w-md">
-              Írd le röviden, milyen vállalkozásról van szó, van-e már weboldalad, és mi lenne a fő cél: több
-              megkeresés, több foglalás, jobb megjelenés vagy teljes újratervezés.
-            </p>
-
             <ul className="space-y-3.5">
               {reassurances.map(({ icon: Icon, text }) => (
                 <li key={text} className="flex items-start gap-3">
