@@ -69,7 +69,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="kapcsolat" className="border-t border-white/6 py-20 md:py-36 bg-lux-dark scroll-mt-24">
+    <section id="kapcsolat" className="border-t border-white/6 py-12 md:py-20 lg:py-36 bg-lux-dark scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Section header — relocated verbatim from the former standalone
             "Dolgozzunk együtt" CTA (FinalCTA) so the two "let's start" moments
@@ -80,12 +80,12 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mb-14 md:mb-16"
+          className="max-w-3xl mb-8 md:mb-16"
         >
           <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
             Dolgozzunk együtt
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-semibold text-lux-cream leading-tight mb-5">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-lux-cream leading-tight mb-5">
             A weboldalad ma is hat{' '}
             <span className="text-gradient-gold">a bevételedre.</span>
             <br />

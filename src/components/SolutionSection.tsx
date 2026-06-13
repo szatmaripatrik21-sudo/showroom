@@ -13,7 +13,7 @@ const MOBILE_HIDDEN_SOLUTIONS = new Set([
 
 export default function SolutionSection() {
   return (
-    <section className="border-t border-white/6 py-20 md:py-36 bg-lux-dark">
+    <section className="border-t border-white/6 py-12 md:py-20 lg:py-36 bg-lux-dark">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <motion.div
@@ -21,12 +21,12 @@ export default function SolutionSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mb-14"
+          className="max-w-3xl mb-8 md:mb-14"
         >
           <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
             A megoldás
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] text-lux-cream font-semibold leading-tight mb-5">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] text-lux-cream font-semibold leading-tight mb-5">
             Nem csak szép weboldalt kapsz.{' '}
             <span className="text-gradient-gold">Üzleti eszközt.</span>
           </h2>

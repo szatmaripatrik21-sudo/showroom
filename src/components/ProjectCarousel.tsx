@@ -84,7 +84,7 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
 
       {/* Dot indicators — mobile/tablet only (the grid needs none) */}
       {multi && (
-        <div className="flex justify-center gap-2 mt-5 lg:hidden">
+        <div className="flex justify-center gap-1 mt-3 lg:hidden">
           {projects.map((project, i) => (
             <button
               key={project.id}
@@ -92,10 +92,14 @@ export default function ProjectCarousel({ projects }: { projects: Project[] }) {
               onClick={() => goTo(i)}
               aria-label={`Ugrás ide: ${project.name}`}
               aria-current={i === activeIndex}
-              className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lux-gold/60 ${
-                i === activeIndex ? 'w-6 bg-lux-gold' : 'w-2 bg-white/25 hover:bg-white/40'
-              }`}
-            />
+              className="group flex h-11 w-7 items-center justify-center focus-visible:outline-none"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all duration-300 group-focus-visible:ring-2 group-focus-visible:ring-lux-gold/60 ${
+                  i === activeIndex ? 'w-6 bg-lux-gold' : 'w-2 bg-white/25 group-hover:bg-white/40'
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}

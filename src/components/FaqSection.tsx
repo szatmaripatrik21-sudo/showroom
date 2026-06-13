@@ -56,7 +56,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 
 export default function FaqSection() {
   return (
-    <section id="gyik" className="border-t border-white/6 py-20 md:py-36">
+    <section id="gyik" className="border-t border-white/6 py-12 md:py-20 lg:py-36">
       <div className="max-w-3xl mx-auto px-6 md:px-10">
         {/* Header */}
         <motion.div
@@ -64,12 +64,12 @@ export default function FaqSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
           <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
             Gyakori kérdések
           </span>
-          <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
             Amit érdemes tudni, mielőtt belevágunk.
           </h2>
         </motion.div>

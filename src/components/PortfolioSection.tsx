@@ -15,7 +15,7 @@ export default function PortfolioSection() {
   const rest = visible.filter((p) => !p.featured)
 
   return (
-    <section id="munkak" className="border-t border-white/6 py-20 md:py-36">
+    <section id="munkak" className="border-t border-white/6 py-12 md:py-20 lg:py-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* Header */}
         <motion.div
@@ -23,13 +23,13 @@ export default function PortfolioSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8 md:mb-14"
         >
           <div>
             <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
               Weboldal-koncepciók
             </span>
-            <h2 className="font-display text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
               Iparágra szabott weboldal-koncepciók.
             </h2>
             <p className="mt-4 font-body text-sm md:text-base text-lux-cream-dim/85 max-w-xl leading-relaxed">
