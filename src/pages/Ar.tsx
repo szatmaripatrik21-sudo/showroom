@@ -31,7 +31,7 @@ export default function Ar() {
               Árazás
             </span>
             <h1 className="font-display font-semibold text-6xl md:text-7xl lg:text-8xl text-gradient-gold leading-[0.93] max-w-3xl mb-8">
-              Induló ár: 119.900 Ft
+              Akár 119.900 Ft-tól
             </h1>
             <p className="font-body text-xl text-sp-text-muted max-w-lg leading-relaxed">
               Az ár a projekt méretétől, funkcióitól és tartalmi előkészítettségétől függ.

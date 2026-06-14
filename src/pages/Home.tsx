@@ -324,7 +324,7 @@ export default function Home() {
                 Befektetés
               </span>
               <h2 className="font-display font-semibold text-5xl md:text-6xl text-gradient-gold leading-tight mb-4">
-                Induló ár: 119.900 Ft
+                Akár 119.900 Ft-tól
               </h2>
               <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-6 max-w-md">
                 Egy jól felépített weboldal segíthet abban, hogy több érdeklődőből
