@@ -72,7 +72,7 @@ export default function Home() {
             className="font-display font-semibold text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl text-sp-text max-w-lg mb-5"
             style={{ lineHeight: '1.0' }}
           >
-            Több megkeresés.<br />Több foglalás.<br />Több bevétel.
+            A weboldalad ne csak szép legyen.<br />Hozzon is ügyfeleket.
           </motion.h1>
 
           <motion.p
@@ -81,9 +81,9 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
             className="font-body text-base md:text-[1.05rem] text-sp-text-muted/90 max-w-sm md:max-w-md mb-8 leading-[1.65]"
           >
-            Prémium, ügyfélszerző weboldalakat készítek éttermeknek, rendelőknek,
-            szalonoknak és szolgáltatóknak — hogy az oldala ne csak jól nézzen ki,
-            hanem több érdeklődőt hozzon.
+            Prémium, gyors és mobilra optimalizált weboldalakat készítek éttermeknek,
+            rendelőknek, szalonoknak és szolgáltatóknak — hogy több megkeresést,
+            több foglalást és több bevételt hozzanak.
           </motion.p>
 
           <motion.div
@@ -105,7 +105,7 @@ export default function Home() {
               className="inline-flex items-center justify-center gap-1.5 font-body text-sm font-medium
                          text-sp-text-muted/80 hover:text-sp-text transition-colors duration-200 py-4"
             >
-              Hogyan működik? <ArrowRight size={14} />
+              Megnézem, hogyan működik <ArrowRight size={14} />
             </Link>
           </motion.div>
         </div>
