@@ -120,49 +120,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SOLUTION ─────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="mb-16 md:mb-20"
-          >
-            <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
-              A megközelítés
-            </span>
-            <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight mb-6 max-w-2xl">
-              Design, ami nem csak jól néz ki. Dolgozik.
-            </h2>
-            <p className="font-body text-lg text-sp-text-muted max-w-lg leading-relaxed">
-              Stratégia. Szöveg. Vizuális irány. Fejlesztés. Minden döntés egy célért
-              történik: hogy a látogató gyorsabban bízzon, értsen, és lépjen.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6 rounded-2xl overflow-hidden">
-            {pillars.map(({ label, desc }, i) => (
-              <motion.div
-                key={label}
-                custom={i}
-                variants={reveal}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="p-8 md:p-10 bg-sp-bg"
-              >
-                <p className="font-display text-2xl font-semibold text-sp-text mb-3">{label}</p>
-                <p className="font-body text-base text-sp-text-muted leading-relaxed">{desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── WORK PREVIEW ─────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6">
+      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.div
             variants={reveal}
@@ -225,6 +184,47 @@ export default function Home() {
                     />
                   </div>
                 </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOLUTION ─────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-36 border-t border-white/6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mb-16 md:mb-20"
+          >
+            <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
+              A megközelítés
+            </span>
+            <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight mb-6 max-w-2xl">
+              Design, ami nem csak jól néz ki. Dolgozik.
+            </h2>
+            <p className="font-body text-lg text-sp-text-muted max-w-lg leading-relaxed">
+              Stratégia. Szöveg. Vizuális irány. Fejlesztés. Minden döntés egy célért
+              történik: hogy a látogató gyorsabban bízzon, értsen, és lépjen.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6 rounded-2xl overflow-hidden">
+            {pillars.map(({ label, desc }, i) => (
+              <motion.div
+                key={label}
+                custom={i}
+                variants={reveal}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="p-8 md:p-10 bg-sp-bg"
+              >
+                <p className="font-display text-2xl font-semibold text-sp-text mb-3">{label}</p>
+                <p className="font-body text-base text-sp-text-muted leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
