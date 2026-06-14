@@ -51,7 +51,7 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex">
           <Button variant="gold" size="sm" asChild>
-            <a href="#kapcsolat">Ajánlatkérés</a>
+            <a href="#kapcsolat">Weboldal-áttekintés</a>
           </Button>
         </div>
 
@@ -83,7 +83,7 @@ export default function Navbar() {
           </ul>
           <div className="mt-6">
             <Button variant="gold" className="w-full" asChild>
-              <a href="#kapcsolat" onClick={() => setOpen(false)}>Ajánlatkérés</a>
+              <a href="#kapcsolat" onClick={() => setOpen(false)}>Weboldal-áttekintés</a>
             </Button>
           </div>
         </div>

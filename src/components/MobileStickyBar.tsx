@@ -26,7 +26,7 @@ export default function MobileStickyBar() {
       <Button size="lg" className="w-full gap-2.5" asChild>
         <a href="#kapcsolat">
           <CalendarDays size={17} />
-          Kérek egy ajánlatot
+          Weboldal-áttekintés kérése
         </a>
       </Button>
     </div>

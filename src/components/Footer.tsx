@@ -52,7 +52,7 @@ export default function Footer() {
 
           {/* CTA */}
           <Button variant="gold" asChild className="w-full md:w-auto">
-            <a href="#kapcsolat">Kérek egy ajánlatot</a>
+            <a href="#kapcsolat">Weboldal-áttekintés</a>
           </Button>
         </div>
 
