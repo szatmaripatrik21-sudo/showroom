@@ -63,14 +63,16 @@ export default function Home() {
           }}
         />
 
+        {/* Contrast veil — feathered ellipse, multiply blend preserves animation texture */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[15]"
+          style={{
+            background: 'radial-gradient(ellipse 120% 90% at 38% 42%, rgba(10,9,8,0.60) 0%, rgba(10,9,8,0.42) 38%, rgba(10,9,8,0.00) 72%)',
+            mixBlendMode: 'multiply',
+          }}
+        />
+
         <div className="relative z-20 flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-28 pb-16 md:pt-32 md:pb-24">
-          {/* Localised scrim only behind the text column */}
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[58%]"
-            style={{
-              background: 'radial-gradient(ellipse 80% 70% at 20% 48%, rgba(0,0,0,0.52) 0%, transparent 100%)',
-            }}
-          />
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -107,7 +109,7 @@ export default function Home() {
               fontSize: 'clamp(0.9375rem, 1.8vw, 1.1rem)',
               lineHeight: '1.55',
               color: '#FAF3EA',
-              textShadow: '0 3px 18px rgba(0,0,0,0.95)',
+              textShadow: '0 1px 2px rgba(0,0,0,0.45)',
             }}
           >
             Prémium, gyors és mobilra optimalizált weboldalakat készítek
