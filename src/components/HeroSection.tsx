@@ -2,6 +2,8 @@ import HeroAnimation from './HeroAnimation'
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 
+const sectorLabels = ['Vendéglátás', 'Hotel', 'Egészségügy', 'Szépségipar']
+
 const valuePoints = [
   { label: 'Több bizalom' },
   { label: 'Több megkeresés' },
@@ -10,23 +12,43 @@ const valuePoints = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-lux-black flex flex-col">
-      {/* ─── Animated background — keep HeroAnimation here ─────────────────── */}
+    <section className="relative w-full min-h-[100svh] overflow-hidden bg-lux-black">
+      {/* ─── Animated background — absolutely positioned, no layout height ───── */}
       <HeroAnimation />
-      {/* ──────────────────────────────────────────────────────────────────── */}
 
-      {/* Dark overlays for text readability */}
-      {/* Layer 1: main top-to-bottom gradient */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/30 to-black/90" />
-      {/* Layer 2: left vignette for copy readability — tames bright streaks crossing the headline */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
-      {/* Layer 3: dedicated bottom bleed — makes value bar always readable */}
-      <div className="absolute bottom-0 left-0 right-0 h-52 z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+      {/* Dark overlays — absolutely positioned, no layout height */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/30 to-black/90" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/30 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-52 z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-      {/* Main content */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 md:px-10 max-w-7xl mx-auto w-full left-0 right-0 mt-8">
-        {/* Trust label */}
-        <div className="animate-fade-in-down mb-8 md:mb-10">
+      {/* ─── Main content — normal document flow ─────────────────────────────── */}
+      {/*
+        Previously this was `absolute inset-0 flex flex-col justify-center`
+        which centered content at 50 % of 100vh (≈450px from top on a 900px
+        screen), leaving ~386px of empty black space between the fixed navbar
+        and the first line of copy.
+
+        Fix: normal flow, pt-28/md:pt-32 clears the 64px fixed navbar plus
+        ~48–64px of breathing room, so the headline is visible immediately.
+        pb-28 keeps the bottom value-bar from overlapping the trust line.
+      */}
+      <div className="relative z-20 mx-auto max-w-7xl w-full px-6 md:px-10 pt-28 md:pt-32 pb-28">
+
+        {/* Sector labels */}
+        <div className="flex flex-wrap gap-2 mb-6 animate-fade-in-down">
+          {sectorLabels.map((label) => (
+            <span
+              key={label}
+              className="text-[9px] tracking-[0.2em] uppercase font-body font-medium
+                         text-lux-cream-dim/55 border border-white/12 rounded-full px-3 py-1"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+
+        {/* Eyebrow */}
+        <div className="mb-6 md:mb-8 animate-fade-in-down">
           <span className="inline-flex items-center gap-2.5 text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold">
             <span className="w-1.5 h-1.5 rounded-full bg-lux-gold animate-pulse flex-shrink-0" />
             Weboldalak, amik ügyfelet hoznak
@@ -34,7 +56,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline */}
-        <div className="space-y-1 mb-8">
+        <div className="space-y-1 mb-6 md:mb-8">
           <h1 className="font-display font-semibold leading-[1.05] text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-lux-cream animate-fade-in-up animation-delay-200">
             Több ügyfél.
           </h1>
@@ -46,14 +68,8 @@ export default function HeroSection() {
           </h1>
         </div>
 
-        {/* Subheadline — wrapped with a localized dark readability scrim so the
-            bright shader streaks never wash out the copy. The scrim sits inside
-            the z-20 content context (above the animation, below the text). */}
-        <div className="relative max-w-xl mb-10">
-          {/* Text-safe zone: soft dark radial layer behind the paragraph only.
-              Stronger on mobile where streaks cross the copy, eased back on
-              desktop where the left vignette already helps. Blurred edges blend
-              naturally into the dark/gold theme. No layout impact. */}
+        {/* Sub-paragraph */}
+        <div className="relative max-w-xl mb-8 md:mb-10">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-x-6 -inset-y-5 -z-10 rounded-[2rem] blur-2xl
@@ -77,13 +93,13 @@ export default function HeroSection() {
           </Button>
         </div>
 
-        {/* Micro-trust line — mirrors the line under the final CTA */}
+        {/* Trust line */}
         <p className="mt-6 font-body text-xs md:text-sm text-zinc-200/80 tracking-wide animate-fade-in animation-delay-1000">
           Átlagban 24 órán belül válaszolok&nbsp; •&nbsp; Konverzióra tervezve&nbsp; •&nbsp; Mobilra optimalizálva
         </p>
       </div>
 
-      {/* Bottom bar — 3 value points */}
+      {/* ─── Bottom value bar — absolute so it never affects content height ──── */}
       <div className="absolute bottom-0 left-0 right-0 z-20
                       bg-black/50 backdrop-blur-md
                       border-t border-amber-400/20
