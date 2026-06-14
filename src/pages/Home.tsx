@@ -49,17 +49,28 @@ export default function Home() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-sp-bg">
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-black text-[#F7F1E8]">
         <HeroAnimation />
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/15 to-black/85" />
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
 
-        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-10 pt-28 pb-20 md:pt-32 md:pb-28">
+        {/* Stronger composite overlay — radial gold hint + vertical vignette + left reading zone */}
+        <div
+          className="pointer-events-none absolute inset-0 z-10"
+          style={{
+            background: [
+              'radial-gradient(circle at 65% 50%, rgba(185,145,82,0.12) 0%, transparent 42%)',
+              'linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.52) 42%, rgba(0,0,0,0.88) 100%)',
+              'linear-gradient(90deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.40) 55%, transparent 100%)',
+            ].join(','),
+          }}
+        />
+
+        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-28 pb-16 md:pt-32 md:pb-24">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="block mb-5 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
+            className="block mb-6 text-[10px] sm:text-xs tracking-[0.34em] uppercase font-body font-medium"
+            style={{ color: '#B99152' }}
           >
             SP. / ügyfélszerző weboldalak
           </motion.span>
@@ -68,8 +79,14 @@ export default function Home() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="font-display font-semibold text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl text-sp-text max-w-lg mb-5"
-            style={{ lineHeight: '1.0' }}
+            className="font-display font-semibold max-w-[760px] mb-6"
+            style={{
+              fontSize: 'clamp(2.1rem, 5.5vw, 4.25rem)',
+              lineHeight: '0.98',
+              letterSpacing: '-0.03em',
+              color: '#F7F1E8',
+              textShadow: '0 3px 18px rgba(0,0,0,0.75)',
+            }}
           >
             A weboldalad ne csak szép legyen.<br />Hozzon is ügyfeleket.
           </motion.h1>
@@ -78,31 +95,47 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-            className="font-body text-base md:text-[1.05rem] text-sp-text-muted/90 max-w-sm md:max-w-md mb-8 leading-[1.65]"
+            className="font-body mb-9"
+            style={{
+              maxWidth: 'min(560px, 92vw)',
+              fontSize: 'clamp(0.9375rem, 1.8vw, 1.1rem)',
+              lineHeight: '1.55',
+              color: '#DED2C2',
+              textShadow: '0 2px 14px rgba(0,0,0,0.90)',
+            }}
           >
-            Prémium, gyors és mobilra optimalizált weboldalakat készítek éttermeknek,
-            rendelőknek, szalonoknak és szolgáltatóknak — hogy több megkeresést,
-            több foglalást és több bevételt hozzanak.
+            Prémium, gyors és mobilra optimalizált weboldalakat készítek
+            vállalkozásoknak és szolgáltatóknak — több megkeresésért,
+            foglalásért és bevételért.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
-            className="flex flex-col sm:flex-row gap-3"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-5"
           >
             <Link
               to="/kapcsolat"
-              className="inline-flex items-center justify-center font-body text-sm font-semibold
-                         bg-sp-text text-sp-bg rounded-full px-7 py-4
-                         hover:bg-sp-text-dim transition-colors duration-200"
+              className="inline-flex items-center justify-center font-body font-semibold rounded-full transition-colors duration-200"
+              style={{
+                background: '#F2EBDD',
+                color: '#11100E',
+                padding: '1rem 2rem',
+                fontSize: '0.9375rem',
+                boxShadow: '0 18px 50px rgba(0,0,0,0.35)',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = '#ffffff')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#F2EBDD')}
             >
               Kérem az ingyenes weboldal-átvilágítást
             </Link>
             <Link
               to="/folyamat"
-              className="inline-flex items-center justify-center gap-1.5 font-body text-sm font-medium
-                         text-sp-text-muted/80 hover:text-sp-text transition-colors duration-200 py-4"
+              className="inline-flex items-center gap-1.5 font-body font-medium transition-colors duration-200"
+              style={{ color: '#B8AA98', fontSize: '0.9375rem' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#F7F1E8')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#B8AA98')}
             >
               Megnézem, hogyan működik <ArrowRight size={14} />
             </Link>
