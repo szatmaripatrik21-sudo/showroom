@@ -3,7 +3,6 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Főoldal', href: '/' },
   { label: 'Koncepciók', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
@@ -31,10 +30,31 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo + Főoldal */}
+        <div className="hidden lg:flex items-center gap-8">
+          <Link
+            to="/"
+            className="font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
+          >
+            SP<span className="text-sp-gold">.</span>
+          </Link>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `font-body text-sm tracking-wide transition-colors duration-200 ${
+                isActive ? 'text-sp-text' : 'text-sp-text-muted hover:text-sp-text'
+              }`
+            }
+          >
+            Főoldal
+          </NavLink>
+        </div>
+
+        {/* Logo only on mobile */}
         <Link
           to="/"
-          className="font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
+          className="lg:hidden font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
         >
           SP<span className="text-sp-gold">.</span>
         </Link>
