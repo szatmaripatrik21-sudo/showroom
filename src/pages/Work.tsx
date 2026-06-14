@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import BrowserMockup from '@/components/BrowserMockup'
 import { projects } from '@/data/projects'
 
@@ -89,9 +89,22 @@ export default function Work() {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 font-body text-sm text-sp-text-muted group-hover:text-sp-gold transition-colors duration-200">
-                    Koncepció megtekintése
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 font-body text-sm text-sp-text-muted group-hover:text-sp-gold transition-colors duration-200">
+                      Koncepció megtekintése
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+                    </div>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 font-body text-xs text-sp-text-muted/50 hover:text-sp-gold transition-colors duration-200"
+                      >
+                        Élő oldal <ExternalLink size={11} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </Link>

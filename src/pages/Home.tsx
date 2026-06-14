@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import HeroAnimation from '@/components/HeroAnimation'
 import BrowserMockup from '@/components/BrowserMockup'
 import { projects } from '@/data/projects'
@@ -211,6 +211,21 @@ export default function Home() {
                     className="text-sp-text-muted group-hover:text-sp-gold group-hover:translate-x-1 transition-all duration-200 shrink-0 mt-1"
                   />
                 </Link>
+
+                {/* Live site link */}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/live flex items-center justify-between px-5 py-3 border-t border-white/6 hover:bg-white/[0.03] transition-colors duration-200"
+                  >
+                    <span className="font-body text-xs text-sp-text-muted/50 group-hover/live:text-sp-gold transition-colors duration-200">
+                      Élő oldal megtekintése
+                    </span>
+                    <ExternalLink size={12} className="text-sp-text-muted/40 group-hover/live:text-sp-gold transition-colors duration-200" />
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>
