@@ -52,19 +52,25 @@ export default function Home() {
       <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-black text-[#F7F1E8]">
         <HeroAnimation />
 
-        {/* Stronger composite overlay — radial gold hint + vertical vignette + left reading zone */}
+        {/* Light global overlay — animation stays visible */}
         <div
           className="pointer-events-none absolute inset-0 z-10"
           style={{
             background: [
-              'radial-gradient(circle at 65% 50%, rgba(185,145,82,0.12) 0%, transparent 42%)',
-              'linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.52) 42%, rgba(0,0,0,0.88) 100%)',
-              'linear-gradient(90deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.40) 55%, transparent 100%)',
+              'radial-gradient(circle at 65% 42%, rgba(185,145,82,0.24) 0%, transparent 42%)',
+              'linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.28) 42%, rgba(0,0,0,0.62) 100%)',
             ].join(','),
           }}
         />
 
         <div className="relative z-20 flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-28 pb-16 md:pt-32 md:pb-24">
+          {/* Localised scrim only behind the text column */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-[58%]"
+            style={{
+              background: 'radial-gradient(ellipse 80% 70% at 20% 48%, rgba(0,0,0,0.52) 0%, transparent 100%)',
+            }}
+          />
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
