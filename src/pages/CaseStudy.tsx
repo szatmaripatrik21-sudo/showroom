@@ -135,7 +135,7 @@ export default function CaseStudy() {
         <div className="max-w-2xl mx-auto px-6 md:px-10">
           <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <h2 className="font-display font-semibold text-4xl md:text-5xl text-sp-text mb-6">
-              Hasonló oldalt szeretnél?
+              Nézzük meg, milyen weboldal illene a te vállalkozásodhoz.
             </h2>
             <Link
               to="/kapcsolat"
