@@ -76,7 +76,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="block mb-6 text-[10px] sm:text-xs tracking-[0.34em] uppercase font-body font-medium"
-            style={{ color: '#B99152' }}
+            style={{ color: '#C9A15D', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
           >
             SP. / ügyfélszerző weboldalak
           </motion.span>
@@ -90,8 +90,8 @@ export default function Home() {
               fontSize: 'clamp(2.1rem, 5.5vw, 4.25rem)',
               lineHeight: '0.98',
               letterSpacing: '-0.03em',
-              color: '#F7F1E8',
-              textShadow: '0 3px 18px rgba(0,0,0,0.75)',
+              color: '#FFF8EE',
+              textShadow: '0 4px 24px rgba(0,0,0,0.95)',
             }}
           >
             A weboldalad ne csak szép legyen.<br />Hozzon is ügyfeleket.
@@ -106,8 +106,8 @@ export default function Home() {
               maxWidth: 'min(560px, 92vw)',
               fontSize: 'clamp(0.9375rem, 1.8vw, 1.1rem)',
               lineHeight: '1.55',
-              color: '#DED2C2',
-              textShadow: '0 2px 14px rgba(0,0,0,0.90)',
+              color: '#F0E6D8',
+              textShadow: '0 3px 18px rgba(0,0,0,0.95)',
             }}
           >
             Prémium, gyors és mobilra optimalizált weboldalakat készítek
@@ -139,9 +139,9 @@ export default function Home() {
             <Link
               to="/folyamat"
               className="inline-flex items-center gap-1.5 font-body font-medium transition-colors duration-200"
-              style={{ color: '#B8AA98', fontSize: '0.9375rem' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#F7F1E8')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#B8AA98')}
+              style={{ color: '#DED2C2', fontSize: '0.9375rem', textShadow: '0 2px 12px rgba(0,0,0,0.75)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#FFF8EE')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#DED2C2')}
             >
               Megnézem, hogyan működik <ArrowRight size={14} />
             </Link>
