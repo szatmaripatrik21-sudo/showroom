@@ -18,10 +18,10 @@ export default function Work() {
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.div variants={reveal} initial="hidden" animate="show">
             <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
-              Munkák
+              Koncepciók
             </span>
             <h1 className="font-display font-semibold text-6xl md:text-7xl lg:text-8xl text-sp-text leading-[0.95] mb-8 max-w-3xl">
-              Kiválasztott munkák.
+              Weboldal-koncepciók.
             </h1>
             <p className="font-body text-lg text-sp-text-muted max-w-lg leading-relaxed">
               Weboldal-koncepciók, amelyek a döntési logikát, vizuális irányt és

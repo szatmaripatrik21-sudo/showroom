@@ -34,7 +34,7 @@ export default function CaseStudy() {
             className="inline-flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-text transition-colors duration-200"
           >
             <ArrowLeft size={14} />
-            Munkák
+            Koncepciók
           </Link>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function CaseStudy() {
         >
           <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
             <div>
-              <p className="font-body text-xs text-sp-text-muted/50 tracking-widest uppercase mb-2">Következő munka</p>
+              <p className="font-body text-xs text-sp-text-muted/50 tracking-widest uppercase mb-2">Következő koncepció</p>
               <h3 className="font-display text-2xl md:text-3xl font-semibold text-sp-text group-hover:text-sp-gold transition-colors duration-200">
                 {nextProject.name}
               </h3>

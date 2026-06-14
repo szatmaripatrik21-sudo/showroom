@@ -93,7 +93,7 @@ export default function Home() {
                          text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
                          hover:text-sp-text hover:border-white/30 transition-all duration-200"
             >
-              Munkák megtekintése
+              Koncepciók megtekintése
               <ArrowRight size={14} />
             </Link>
           </motion.div>
@@ -131,13 +131,13 @@ export default function Home() {
             className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 md:mb-16"
           >
             <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight">
-              Kiválasztott munkák.
+              Kiválasztott koncepciók.
             </h2>
             <Link
               to="/munkak"
               className="flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-gold transition-colors duration-200 shrink-0"
             >
-              Összes munka <ArrowRight size={14} />
+              Összes koncepció <ArrowRight size={14} />
             </Link>
           </motion.div>
 
