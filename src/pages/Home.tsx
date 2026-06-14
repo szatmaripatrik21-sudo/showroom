@@ -55,12 +55,12 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/15 to-black/85" />
         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
 
-        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-36">
+        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-10 pt-28 pb-20 md:pt-32 md:pb-28">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="block mb-8 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
+            className="block mb-5 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
           >
             SP. / ügyfélszerző weboldalak
           </motion.span>
@@ -69,7 +69,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="font-display font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-sp-text max-w-xl mb-7"
+            className="font-display font-semibold text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl text-sp-text max-w-lg mb-5"
+            style={{ lineHeight: '1.0' }}
           >
             Több megkeresés.<br />Több foglalás.<br />Több bevétel.
           </motion.h1>
@@ -78,11 +79,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-            className="font-body text-base md:text-lg text-sp-text-muted max-w-md mb-10 leading-relaxed"
+            className="font-body text-base md:text-[1.05rem] text-sp-text-muted/90 max-w-sm md:max-w-md mb-8 leading-[1.65]"
           >
-            Olyan vállalkozói weboldalakat készítek éttermeknek, rendelőknek, szalonoknak
-            és szolgáltatóknak, amelyek bizalmat építenek, meggyőzik az érdeklődőket,
-            és több kapcsolatfelvételt hoznak.
+            Prémium, ügyfélszerző weboldalakat készítek éttermeknek, rendelőknek,
+            szalonoknak és szolgáltatóknak — hogy az oldala ne csak jól nézzen ki,
+            hanem több érdeklődőt hozzon.
           </motion.p>
 
           <motion.div
@@ -93,20 +94,18 @@ export default function Home() {
           >
             <Link
               to="/kapcsolat"
-              className="inline-flex items-center justify-center font-body text-sm font-medium
-                         bg-sp-text text-sp-bg rounded-full px-7 py-3.5
+              className="inline-flex items-center justify-center font-body text-sm font-semibold
+                         bg-sp-text text-sp-bg rounded-full px-7 py-4
                          hover:bg-sp-text-dim transition-colors duration-200"
             >
-              Kérek egy ingyenes átnézést
+              Kérem az ingyenes weboldal-átvilágítást
             </Link>
             <Link
               to="/folyamat"
-              className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                         text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
-                         hover:text-sp-text hover:border-white/30 transition-all duration-200"
+              className="inline-flex items-center justify-center gap-1.5 font-body text-sm font-medium
+                         text-sp-text-muted/80 hover:text-sp-text transition-colors duration-200 py-4"
             >
-              Megnézem, hogyan működik
-              <ArrowRight size={14} />
+              Hogyan működik? <ArrowRight size={14} />
             </Link>
           </motion.div>
         </div>
