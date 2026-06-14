@@ -13,7 +13,6 @@ const reveal: Variants = {
 
 const homePreviews = projects.filter(p => ['ambrus-dental-klinika', 'beauty-embassy'].includes(p.slug))
 
-const problemPoints = ['kevés ajánlatkérés', 'elveszett érdeklődők', 'gyenge első benyomás']
 
 const whyCards = [
   {
@@ -107,38 +106,6 @@ export default function Home() {
             >
               Megnézem, hogyan működik <ArrowRight size={14} />
             </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 border-t border-white/6">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-6 max-w-2xl">
-              A legtöbb weboldal nem rossz. Csak nem hoz elég ügyfelet.
-            </h2>
-            <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed mb-8">
-              Sok vállalkozásnak van weboldala, mégis kevés az ajánlatkérés, a foglalás
-              vagy a telefonhívás. Ennek oka gyakran nem a szolgáltatás minősége, hanem
-              az, hogy az oldal nem épít elég bizalmat, nem vezeti az érdeklődőt, és nem
-              ad elég okot a kapcsolatfelvételre.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {problemPoints.map((pt) => (
-                <span
-                  key={pt}
-                  className="font-body text-xs tracking-wide text-sp-text-muted/60 border border-white/8 rounded-full px-4 py-1.5"
-                >
-                  {pt}
-                </span>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
