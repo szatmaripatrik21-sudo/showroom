@@ -155,7 +155,10 @@ export default function Home() {
                   />
                 </div>
                 {/* Text: navigates to case study */}
-                <Link to={`/munkak/${project.slug}`} className="group flex items-start justify-between gap-4">
+                <Link
+                  to={`/munkak/${project.slug}`}
+                  className="group flex items-start justify-between gap-4 mt-1 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3.5 hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200"
+                >
                   <div>
                     <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-text-muted mb-1">
                       {project.industryLabel} · Weboldal-koncepció
