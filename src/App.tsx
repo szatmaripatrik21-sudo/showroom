@@ -1,5 +1,4 @@
 import { MotionConfig } from 'framer-motion'
-import { VideoBusProvider } from '@/lib/videoBus'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import HeroSocialProof from '@/components/HeroSocialProof'
@@ -17,7 +16,6 @@ import MobileStickyBar from '@/components/MobileStickyBar'
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-    <VideoBusProvider>
     <div className="min-h-screen bg-lux-black text-lux-cream">
       <Navbar />
 
@@ -58,7 +56,6 @@ export default function App() {
       {/* Persistent mobile CTA */}
       <MobileStickyBar />
     </div>
-    </VideoBusProvider>
     </MotionConfig>
   )
 }
