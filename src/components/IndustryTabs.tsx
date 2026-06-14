@@ -1,18 +1,40 @@
 import { useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2 } from 'lucide-react'
 import { industries } from '@/data/content'
 import type { Industry } from '@/data/content'
 import type { ProjectCategory } from '@/data/projects'
 
+// Decision logic per industry: hesitation → website's job → CTA
+const industryLogic: Record<ProjectCategory, { hesitation: string; job: string; cta: string }> = {
+  hospitality: {
+    hesitation: 'Megtalálja a menüt és a nyitvatartást? Érti az első 5 másodpercben, milyen hely ez?',
+    job: 'Gyorsan megmutatni a hangulatot, kínálatot és a helyszínt — mobilon is, útközben is.',
+    cta: 'Asztalfoglalás vagy kapcsolatfelvétel egy érintéssel',
+  },
+  hotel: {
+    hesitation: 'Érdemes itt megszállni? Milyen az élmény? Hogyan foglalok — és miért közvetlenül, ne OTA-n?',
+    job: 'Megmutatni az élményt, egyértelművé tenni a szobákat, és a közvetlen foglalás útját rövidre szabni.',
+    cta: 'Közvetlen foglalás — kevesebb közvetítő, több bevétel',
+  },
+  health: {
+    hesitation: 'Megbízható ez a rendelő? Kompetens az orvos? Hogyan kérek időpontot?',
+    job: 'Szakmaiságot és hitelt közvetíteni még mielőtt a páciens dönt — és frictionless időpontkérést adni.',
+    cta: 'Egyszerű időpontfoglalás, félelem nélkül',
+  },
+  beauty: {
+    hesitation: 'A stílusa illik hozzám? Milyen minőségű a munka? Hogyan foglalok?',
+    job: 'A vizuális minőséget és a stílust egyből megmutatni — és az online foglalást egy lépéssé tenni.',
+    cta: 'Portfólió, árak és foglalás egy helyen',
+  },
+}
+
 export default function IndustryTabs() {
   const [active, setActive] = useState<ProjectCategory>('hospitality')
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
-
   const current = industries.find((i) => i.id === active) as Industry
+  const logic = industryLogic[active]
 
-  // Roving focus + arrow-key navigation for the tablist (WAI-ARIA pattern).
   const onTabKeyDown = (e: KeyboardEvent, index: number) => {
     const last = industries.length - 1
     let next = -1
@@ -27,33 +49,33 @@ export default function IndustryTabs() {
   }
 
   return (
-    <section id="szolgaltatasok" className="border-t border-white/6 py-12 md:py-20 lg:py-36 bg-lux-dark">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="szolgaltatasok" className="sp-section bg-sp-surface">
+      <div className="sp-container">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mb-8 md:mb-14"
+          className="sp-section-header"
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
-            Miért dolgozom így
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-lux-cream font-semibold leading-tight mb-5">
-            Minden iparágnak megvan a maga logikája.
+          <span className="sp-eyebrow">Iparági logika</span>
+          <h2 className="sp-h2 mb-5">
+            Nem minden weboldalnak<br className="hidden sm:block" /> ugyanazt kell eladnia.
           </h2>
-          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed">
-            Más miatt dönt egy hotelvendég, egy páciens, egy éttermi vendég vagy egy szépségszalon új
-            ügyfele. Ezért az oldal szerkezetét mindig az adott üzleti helyzethez igazítom.
+          <p className="sp-body">
+            Más kérdése van egy hotelvendégnek és egy páciensnek. A weboldal akkor működik,
+            ha pontosan a te látogatód bizonytalanságára válaszol.
           </p>
         </motion.div>
 
-        {/* Tab navigation — horizontally scrollable on mobile, wraps on desktop */}
+        {/* Tab nav */}
         <div
           role="tablist"
           aria-label="Iparágak"
-          className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible gap-1 mb-12 border-b border-white/8 pb-0
+          className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible gap-1 mb-10
+                     border-b border-white/8 pb-0
                      [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           {industries.map((ind, i) => {
@@ -69,11 +91,14 @@ export default function IndustryTabs() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActive(ind.id)}
                 onKeyDown={(e) => onTabKeyDown(e, i)}
-                className={`flex-shrink-0 whitespace-nowrap px-4 md:px-5 py-3 text-xs font-body font-medium tracking-[0.1em] uppercase transition-all duration-200 border-b-2 -mb-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lux-gold/60 focus-visible:rounded-sm ${
-                  selected
-                    ? 'text-lux-gold border-lux-gold'
-                    : 'text-lux-cream-dim/70 border-transparent hover:text-lux-cream hover:border-white/20'
-                }`}
+                className={`flex-shrink-0 whitespace-nowrap px-4 md:px-5 py-3 text-xs font-body font-medium
+                           tracking-[0.1em] uppercase transition-all duration-200 border-b-2 -mb-px
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sp-gold/60
+                           focus-visible:rounded-sm ${
+                             selected
+                               ? 'text-sp-gold border-sp-gold'
+                               : 'text-sp-text-muted border-transparent hover:text-sp-text hover:border-white/20'
+                           }`}
               >
                 {ind.label}
               </button>
@@ -81,7 +106,7 @@ export default function IndustryTabs() {
           })}
         </div>
 
-        {/* Tab content */}
+        {/* Panel — decision logic format */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -91,49 +116,43 @@ export default function IndustryTabs() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start"
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-5"
           >
-            {/* Left: description */}
-            <div className="space-y-6 lg:sticky lg:top-28">
-              <span
-                className="text-[10px] tracking-[0.2em] uppercase font-body font-medium block mb-1"
-                style={{ color: current.accentColor }}
-              >
-                {current.shortLabel}
-              </span>
-              <h3 className="font-display text-3xl md:text-4xl font-semibold text-lux-cream leading-tight">
-                {current.tagline}
-              </h3>
-              <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed">
-                {current.description}
+            {/* Hesitation */}
+            <div className="rounded-xl border border-white/8 bg-sp-bg/50 p-6 space-y-3">
+              <p className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold text-sp-text-muted">
+                A látogató kérdése
+              </p>
+              <p className="font-body text-sm text-sp-text-dim leading-relaxed">
+                „{logic.hesitation}"
               </p>
             </div>
 
-            {/* Right: focus points */}
-            <div className="space-y-3">
-              {current.focus.map(({ title, desc }, i) => (
-                <motion.div
-                  key={title}
-                  initial={{ opacity: 0, x: 12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex gap-4 p-5 rounded-xl border border-white/8 bg-lux-black/40 hover:border-lux-gold/25 transition-colors duration-300"
-                >
-                  <CheckCircle2
-                    size={16}
-                    className="flex-shrink-0 mt-0.5"
-                    style={{ color: current.accentColor }}
-                  />
-                  <div>
-                    <span className="font-body text-sm font-medium text-lux-cream block mb-0.5">{title}</span>
-                    <span className="font-body text-xs text-lux-cream-dim/75 leading-snug">{desc}</span>
-                  </div>
-                </motion.div>
-              ))}
+            {/* Website's job */}
+            <div
+              className="rounded-xl border p-6 space-y-3"
+              style={{ borderColor: `${current.accentColor}40`, background: `${current.accentColor}08` }}
+            >
+              <p
+                className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold"
+                style={{ color: current.accentColor }}
+              >
+                A weboldal feladata
+              </p>
+              <p className="font-body text-sm text-sp-text leading-relaxed">{logic.job}</p>
+            </div>
+
+            {/* CTA */}
+            <div className="rounded-xl border border-sp-gold/20 bg-sp-gold/5 p-6 space-y-3">
+              <p className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold text-sp-gold">
+                Fő konverziós pont
+              </p>
+              <p className="font-body text-sm text-sp-text leading-relaxed">{logic.cta}</p>
             </div>
           </motion.div>
         </AnimatePresence>
+
       </div>
     </section>
   )
