@@ -52,68 +52,68 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-sp-bg">
         <HeroAnimation />
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/20 to-black/85" />
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+        {/* Base darkening — heavier than before so animation reads as atmosphere, not decoration */}
+        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/50 to-black/95" />
+        {/* Left reading-zone: ensures zero visual noise behind headline and body copy */}
+        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
 
         <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-36">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="block mb-8 text-[10px] tracking-[0.35em] uppercase font-body font-medium text-sp-gold"
+            className="block mb-8 text-[10px] tracking-[0.4em] uppercase font-body font-medium text-white/35"
           >
-            SP. — Prémium weboldalak
+            SP. / stratégiai webdesign
           </motion.span>
 
           <motion.h1
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="font-display font-semibold leading-[0.93] text-6xl sm:text-7xl md:text-8xl lg:text-[5.5rem] xl:text-[6.5rem] text-sp-text max-w-4xl mb-8"
+            transition={{ duration: 0.85, delay: 0.3, ease: 'easeOut' }}
+            className="font-body font-bold leading-[1.08] text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[5.75rem] text-white max-w-3xl mb-7"
           >
-            Prémium weboldalak, amik első látásra bizalmat építenek.
+            Kevesebb magyarázat.<br />Több bizalom.
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-            className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl mb-3 leading-relaxed"
+            className="font-body text-base md:text-lg text-white/55 max-w-md mb-3 leading-relaxed"
           >
-            Egyedi, konverzióra tervezett weboldalak vendéglátásnak, hoteleknek, egészségügynek és szépségiparnak.
+            Weboldalakat tervezek szolgáltató vállalkozásoknak, ahol az első benyomás már a megkeresés felé visz.
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="font-body text-sm text-sp-text-muted/50 tracking-widest uppercase mb-10"
+            className="font-body text-xs text-white/25 tracking-[0.2em] uppercase mb-10"
           >
-            Nem sablon. Nem dekoráció. Üzleti eszköz.
+            Egyedi struktúra. Tiszta szöveg. Gyors döntési útvonal.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7, ease: 'easeOut' }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-row items-center gap-6"
           >
             <Link
               to="/kapcsolat"
-              className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                         bg-sp-gold text-[#0a0908] rounded-full px-7 py-3.5
-                         hover:bg-sp-gold-hi transition-colors duration-200"
+              className="inline-flex items-center justify-center font-body text-sm font-medium
+                         bg-white/95 text-[#0a0908] rounded-lg px-6 py-3
+                         hover:bg-white transition-colors duration-200"
             >
-              Kérek egy áttekintést
+              Áttekintést kérek
             </Link>
             <Link
               to="/munkak"
-              className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                         text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
-                         hover:text-sp-text hover:border-white/30 transition-all duration-200"
+              className="inline-flex items-center gap-1.5 font-body text-sm text-white/45
+                         hover:text-white/80 transition-colors duration-200"
             >
-              Koncepciók megtekintése
-              <ArrowRight size={14} />
+              Munkák <ArrowRight size={13} />
             </Link>
           </motion.div>
         </div>

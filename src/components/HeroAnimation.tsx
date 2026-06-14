@@ -30,16 +30,21 @@ float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10
 void main(void){
   vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
   vec3 col=vec3(0);
-  float bg=clouds(vec2(st.x+T*.5,-st.y));
-  uv*=1.-.3*(sin(T*.2)*.5+.5);
+  // Offset +2.0 pushes the warm glow toward the right edge, away from left-aligned text
+  float bg=clouds(vec2(st.x+2.0+T*.08,-st.y));
+  uv*=1.-.3*(sin(T*.04)*.5+.5);
   for(float i=1.;i<12.;i++){
-    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
+    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.08+.1*uv.x);
     vec2 p=uv;float d=length(p);
-    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+    col+=.00055/d*(cos(sin(i)*vec3(1,2,3))+1.);
     float b=noise(i+p+bg*1.731);
-    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+    col+=.0008*b/length(max(p,vec2(b*p.x*.02,p.y)));
     col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
   }
+  // Desaturate 50% toward luma, then crush brightness to ~25%
+  float luma=dot(col,vec3(0.299,0.587,0.114));
+  col=mix(col,vec3(luma),0.5);
+  col*=0.25;
   O=vec4(col,1);
 }`
 
