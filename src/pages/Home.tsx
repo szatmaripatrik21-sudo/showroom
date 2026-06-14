@@ -63,16 +63,7 @@ export default function Home() {
           }}
         />
 
-        {/* Contrast veil — feathered ellipse, multiply blend preserves animation texture */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[15]"
-          style={{
-            background: 'radial-gradient(ellipse 120% 90% at 38% 42%, rgba(10,9,8,0.60) 0%, rgba(10,9,8,0.42) 38%, rgba(10,9,8,0.00) 72%)',
-            mixBlendMode: 'multiply',
-          }}
-        />
-
-        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-28 pb-16 md:pt-32 md:pb-24">
+<div className="relative z-20 flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-28 pb-16 md:pt-32 md:pb-24">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -109,7 +100,9 @@ export default function Home() {
               fontSize: 'clamp(0.9375rem, 1.8vw, 1.1rem)',
               lineHeight: '1.55',
               color: '#FAF3EA',
-              textShadow: '0 1px 2px rgba(0,0,0,0.45)',
+              textShadow: '0 1px 2px rgba(0,0,0,0.55), 0 0 8px rgba(0,0,0,0.35)',
+              WebkitTextStroke: '0.4px rgba(0,0,0,0.4)',
+              paintOrder: 'stroke fill',
             }}
           >
             Prémium, gyors és mobilra optimalizált weboldalakat készítek
