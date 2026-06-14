@@ -27,3 +27,7 @@ dist-ssr
 .netlify
 
 .vercel
+
+# Mobile-length audit: keep the harness scripts (_audit/*.mjs) in git,
+# but not the large full-page screenshots (regenerate via _audit/measure.mjs).
+_audit/**/*.png
