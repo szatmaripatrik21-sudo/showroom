@@ -13,10 +13,29 @@ const reveal: Variants = {
 
 const homePreviews = projects.filter(p => ['ambrus-dental-klinika', 'beauty-embassy'].includes(p.slug))
 
-const pillars = [
-  { label: 'Bizalom', desc: 'Az első benyomás szakmai és prémium.' },
-  { label: 'Egyértelműség', desc: 'A látogató azonnal érti, miért téged válasszon.' },
-  { label: 'Konverzió', desc: 'A következő lépés mindig egyszerű és látható.' },
+const problemPoints = ['érthető ajánlat', 'gyors döntés', 'látható kapcsolatfelvétel']
+
+const whyCards = [
+  {
+    title: 'Első benyomás',
+    text: 'Pár másodperc alatt eldől, hogy a vállalkozásod profinak, megbízhatónak és választásra érdemesnek tűnik-e.',
+    label: 'Cél: bizalom az első képernyőtől',
+  },
+  {
+    title: 'Tiszta ajánlat',
+    text: 'A látogató gyorsan értse, mivel foglalkozol, kinek segítesz, és miért érdemes nálad érdeklődnie.',
+    label: 'Cél: kevesebb bizonytalanság',
+  },
+  {
+    title: 'Iparágra szabott felépítés',
+    text: 'Egy fogászat, hotel, étterem vagy szépségszalon más logika alapján győz meg. Az oldal szerkezete ehhez igazodik.',
+    label: 'Cél: relevánsabb oldalélmény',
+  },
+  {
+    title: 'Egyértelmű következő lépés',
+    text: 'Ajánlatkérés, időpontfoglalás, telefonhívás vagy üzenetküldés — a látogatónak mindig tudnia kell, mit tegyen.',
+    label: 'Cél: több megkeresés',
+  },
 ]
 
 const offerPoints = [
@@ -101,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* ── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6">
+      <section className="py-24 md:py-32 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.div
             variants={reveal}
@@ -109,19 +128,29 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true }}
           >
-            <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-8 max-w-2xl">
+            <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-6 max-w-2xl">
               A látogató nem vár.
             </h2>
-            <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed mb-8">
               Pár másodperc alatt eldönti, hogy marad-e. Ha nem érti az ajánlatod,
-              nem érzi a minőséget, vagy nem találja a következő lépést — továbblép.
+              nem érzi a bizalmat, vagy nem találja a következő lépést — továbbmegy.
             </p>
+            <div className="flex flex-wrap gap-3">
+              {problemPoints.map((pt) => (
+                <span
+                  key={pt}
+                  className="font-body text-xs tracking-wide text-sp-text-muted/60 border border-white/8 rounded-full px-4 py-1.5"
+                >
+                  {pt}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── WORK PREVIEW ─────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
+      {/* ── CONCEPTS PREVIEW ─────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 border-t border-white/6 bg-sp-surface">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.div
             variants={reveal}
@@ -190,49 +219,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SOLUTION ─────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6">
+      {/* ── WHY IT WORKS ─────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
+
+          {/* Section header: two-column */}
           <motion.div
             variants={reveal}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mb-16 md:mb-20"
+            className="mb-14 md:mb-16"
           >
             <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
-              A megközelítés
+              Miért működik
             </span>
-            <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight mb-6 max-w-2xl">
-              Design, ami nem csak jól néz ki. Dolgozik.
-            </h2>
-            <p className="font-body text-lg text-sp-text-muted max-w-lg leading-relaxed">
-              Stratégia. Szöveg. Vizuális irány. Fejlesztés. Minden döntés egy célért
-              történik: hogy a látogató gyorsabban bízzon, értsen, és lépjen.
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start">
+              <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight">
+                Egy jó weboldal nem dísz. Ügyfeleket terel a következő lépés felé.
+              </h2>
+              <div>
+                <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-7">
+                  A látogató nem elemzi a designodat. Érez valamit, ért valamit, majd dönt.
+                  Ezért az oldalnak egyszerre kell profi benyomást keltenie, gyorsan
+                  elmagyaráznia az ajánlatodat, és könnyűvé tennie a kapcsolatfelvételt.
+                </p>
+                <blockquote className="border-l-2 border-sp-gold/50 pl-5">
+                  <p className="font-body text-base text-sp-text-muted/70 leading-relaxed italic">
+                    Ha a látogató bizonytalan, továbbáll. Ha érti, miért téged válasszon, lépni fog.
+                  </p>
+                </blockquote>
+              </div>
+            </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/6 rounded-2xl overflow-hidden">
-            {pillars.map(({ label, desc }, i) => (
+          {/* 2×2 card grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/6 rounded-2xl overflow-hidden mb-12 md:mb-14">
+            {whyCards.map(({ title, text, label }, i) => (
               <motion.div
-                key={label}
+                key={title}
                 custom={i}
                 variants={reveal}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="p-8 md:p-10 bg-sp-bg"
+                className="p-8 md:p-10 bg-sp-bg flex flex-col gap-4"
               >
-                <p className="font-display text-2xl font-semibold text-sp-text mb-3">{label}</p>
-                <p className="font-body text-base text-sp-text-muted leading-relaxed">{desc}</p>
+                <p className="font-display text-xl font-semibold text-sp-text">{title}</p>
+                <p className="font-body text-base text-sp-text-muted leading-relaxed flex-1">{text}</p>
+                <span className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-gold/60">{label}</span>
               </motion.div>
             ))}
           </div>
+
+          {/* Bottom CTA row */}
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8"
+          >
+            <p className="font-body text-base text-sp-text-muted leading-relaxed max-w-sm">
+              Szeretnéd tudni, nálad melyik pont hiányzik most?
+            </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
+              <Link
+                to="/kapcsolat"
+                className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
+                           bg-sp-gold text-[#0a0908] rounded-full px-6 py-3
+                           hover:bg-sp-gold-hi transition-colors duration-200"
+              >
+                Áttekintést kérek
+              </Link>
+              <Link
+                to="/munkak"
+                className="inline-flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-gold transition-colors duration-200"
+              >
+                Koncepciók megtekintése <ArrowRight size={14} />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ── OFFER PREVIEW ────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
+      <section className="py-24 md:py-32 border-t border-white/6 bg-sp-surface">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -277,7 +349,7 @@ export default function Home() {
       </section>
 
       {/* ── PRICING PREVIEW ──────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6">
+      <section className="py-24 md:py-32 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
