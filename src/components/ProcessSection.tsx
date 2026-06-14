@@ -1,64 +1,97 @@
 import { motion } from 'framer-motion'
-import { processSteps } from '@/data/content'
+
+const steps = [
+  {
+    number: '01',
+    title: 'Felmérés és cél',
+    description:
+      'Megnézem, milyen vállalkozásról van szó, kiket szeretnél elérni, és mi számít sikernek: több foglalás, több ajánlatkérés, jobb első benyomás vagy erősebb márka.',
+    fear: 'Mennyi időt vesz el tőlem?',
+    answer: '~30 perces egyeztetés vagy kérdőív — nem kell órákat készülni.',
+  },
+  {
+    number: '02',
+    title: 'Ajánlat és struktúra',
+    description:
+      'Felépül az oldal logikája: milyen szekciók kellenek, milyen üzenetek győzik meg a látogatót, hol legyenek a konverziós pontok. Ezt először papíron, nem pixelben.',
+    fear: 'Honnan tudom, hogy jó lesz a struktúra?',
+    answer: 'Egyeztetünk az irányról — csak utána kezdődik a design.',
+  },
+  {
+    number: '03',
+    title: 'Szöveg és vizuális irány',
+    description:
+      'Szövegezés és moodboard — az oldal hangja és megjelenése előbb szóban és képekben megjelenik, mint kódban. Ha nincs tartalom, segítek kialakítani.',
+    fear: 'Kell kész szöveget adnom?',
+    answer: 'Nem feltétlenül. Ha van anyagod, abból dolgozom; ha nincs, segítek.',
+  },
+  {
+    number: '04',
+    title: 'Design és fejlesztés',
+    description:
+      'Az egyeztetett iránya alapján épül az oldal: egyedi vizuális irány, reszponzív fejlesztés, animációk és a konverziós útvonalak kialakítása.',
+    fear: 'Hány módosítást kérhetek?',
+    answer: 'Egy stratégiai finomhangolási kör benne van — kisebb javítások menet közben is.',
+  },
+  {
+    number: '05',
+    title: 'Átadás és finomhangolás',
+    description:
+      'Mobilnézet, sebesség, CTA-k, alapSEO-ellenőrzés, majd élesítés. Átadás után rövid útmutató és admin-hozzáférés, ha a rendszer támogatja.',
+    fear: 'Mi történik az átadás után?',
+    answer: 'Egy finomhangolási kört kapsz az első visszajelzések alapján, külön díj nélkül.',
+  },
+]
 
 export default function ProcessSection() {
   return (
-    <section id="folyamat" className="border-t border-white/6 py-12 md:py-20 lg:py-36">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        {/* Header */}
+    <section id="folyamat" className="sp-section">
+      <div className="sp-container">
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl mb-8 md:mb-20"
+          className="sp-section-header"
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
-            Folyamat
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-lux-cream font-semibold leading-tight mb-5">
-            Így készül el a weboldalad.
-          </h2>
-          <p className="font-body text-sm md:text-base text-lux-cream-dim/85 leading-relaxed">
-            Átlátható folyamat, felesleges körök nélkül. Először megértjük az üzleti célt, utána épül rá a
-            struktúra, a design és a technikai megvalósítás.
+          <span className="sp-eyebrow">Folyamat</span>
+          <h2 className="sp-h2 mb-5">Így készül el a weboldalad.</h2>
+          <p className="sp-body">
+            Átlátható lépések, felesleges körök nélkül. Minden fázis egy konkrét félelemet szüntet meg.
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4
-                        [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
-                        lg:grid lg:grid-cols-4 lg:gap-px lg:bg-white/6 lg:rounded-2xl lg:overflow-hidden lg:pb-0">
-          {processSteps.map(({ number, title, description }, i) => (
+        <div className="space-y-4">
+          {steps.map(({ number, title, description, fear, answer }, i) => (
             <motion.div
               key={number}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative snap-start shrink-0 w-[78%] sm:w-[55%] rounded-2xl border border-white/8 p-6 bg-lux-black hover:bg-lux-dark/70 transition-colors duration-300 group lg:w-auto lg:rounded-none lg:border-0 lg:p-8"
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 md:gap-8 rounded-xl border border-white/8 bg-sp-surface p-6 items-start"
             >
               {/* Step number */}
-              <div className="font-display text-5xl font-bold text-gradient-gold mb-6 leading-none">
+              <div className="font-display text-4xl font-bold text-sp-gold/30 leading-none w-12">
                 {number}
               </div>
 
-              {/* Connector arrow on desktop */}
-              {i < processSteps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 right-0 w-4 h-4 translate-x-2 z-10">
-                  <div className="w-2 h-px bg-lux-gold/30 absolute top-1/2 -translate-y-1/2 right-0 translate-x-full" />
-                </div>
-              )}
+              {/* Content */}
+              <div className="space-y-2">
+                <h3 className="font-display text-xl font-semibold text-sp-text">{title}</h3>
+                <p className="font-body text-sm text-sp-text-muted leading-relaxed">{description}</p>
+              </div>
 
-              <h3 className="font-display text-xl font-semibold text-lux-cream mb-3 leading-tight">
-                {title}
-              </h3>
-              <p className="font-body text-sm text-lux-cream-dim/80 leading-relaxed">
-                {description}
-              </p>
+              {/* Owner fear + answer */}
+              <div className="md:w-56 rounded-lg bg-sp-bg/60 border border-white/6 p-3.5 space-y-1.5 flex-shrink-0">
+                <p className="font-body text-[10px] text-sp-text-muted/70 italic leading-snug">„{fear}"</p>
+                <p className="font-body text-[11px] text-sp-gold leading-snug">{answer}</p>
+              </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )
