@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import HeroAnimation from '@/components/HeroAnimation'
 import BrowserMockup from '@/components/BrowserMockup'
 import { projects } from '@/data/projects'
 
@@ -49,103 +50,68 @@ export default function Home() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[100svh] flex flex-col bg-sp-bg overflow-hidden">
-        {/* Subtle bottom vignette for depth — no animation layer */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-sp-bg to-transparent" />
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden bg-sp-bg">
+        <HeroAnimation />
+        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/15 to-black/85" />
+        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
 
-        <div className="relative z-20 flex-1 flex items-center w-full max-w-7xl mx-auto px-6 md:px-10 pt-24 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+        <div className="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-36">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="block mb-8 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
+          >
+            SP. / webdesign
+          </motion.span>
 
-            {/* ── LEFT: copy ───────────────────────────────────────── */}
-            <div>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="block mb-8 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
-              >
-                SP. / webdesign
-              </motion.span>
+          {/*
+            ALTERNATE HEADLINES (A/B — do not render):
+            "Weboldal, ami vendéget hoz, nem csak szépen mutat."
+            "A weboldala lehet, hogy épp vendégeket veszít Önnek."
+          */}
+          <motion.h1
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
+            className="font-display font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-sp-text max-w-xl mb-7"
+          >
+            Olyan weboldal, ami miatt Önt választják, nem a konkurenciát.
+          </motion.h1>
 
-              {/*
-                ALTERNATE HEADLINES (A/B — do not render):
-                "Weboldal, ami vendéget hoz, nem csak szépen mutat."
-                "A weboldala lehet, hogy épp vendégeket veszít Önnek."
-              */}
-              <motion.h1
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-                className="font-display font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-sp-text max-w-xl mb-7"
-              >
-                Olyan weboldal, ami miatt Önt választják, nem a konkurenciát.
-              </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+            className="font-body text-base md:text-lg text-sp-text-muted max-w-md mb-10 leading-relaxed"
+          >
+            Éttermeknek, szállodáknak, rendelőknek és szalonoknak építek weboldalt, ami nem csak igényes — foglalást és telefonhívást is hoz.
+          </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-                className="font-body text-base md:text-lg text-sp-text-muted max-w-md mb-10 leading-relaxed"
-              >
-                Éttermeknek, szállodáknak, rendelőknek és szalonoknak építek weboldalt, ami nem csak igényes — foglalást és telefonhívást is hoz.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
-                className="flex flex-col sm:flex-row gap-3"
-              >
-                <Link
-                  to="/kapcsolat"
-                  className="inline-flex items-center justify-center font-body text-sm font-medium
-                             bg-sp-text text-sp-bg rounded-full px-7 py-3.5
-                             hover:bg-sp-text-dim transition-colors duration-200"
-                >
-                  Kérek egy ingyenes átnézést
-                </Link>
-                <Link
-                  to="/munkak"
-                  className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                             text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
-                             hover:text-sp-text hover:border-white/30 transition-all duration-200"
-                >
-                  Munkáim megtekintése
-                  <ArrowRight size={14} />
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* ── RIGHT: phone mockup ───────────────────────────────
-                {{PLACEHOLDER: phone mockup screenshot — Aranypinty or
-                Pesti6 hero view, portrait device frame ~390×844px.
-                Supply as /public/hero-mockup.png or similar and replace
-                the placeholder div below with:
-                  <img src="/hero-mockup.png" alt="..." className="..." />
-                Recommended: export from Figma/browser at 2× retina,
-                device frame optional but preferred.}}
-            ─────────────────────────────────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-              className="hidden lg:flex justify-center items-center"
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+            className="flex flex-col sm:flex-row gap-3"
+          >
+            <Link
+              to="/kapcsolat"
+              className="inline-flex items-center justify-center font-body text-sm font-medium
+                         bg-sp-text text-sp-bg rounded-full px-7 py-3.5
+                         hover:bg-sp-text-dim transition-colors duration-200"
             >
-              <div
-                className="w-[260px] rounded-[2.5rem] border border-white/10 bg-sp-surface flex flex-col items-center justify-center gap-3 text-center px-6"
-                style={{ aspectRatio: '9/19' }}
-              >
-                <div className="w-8 h-1 rounded-full bg-white/10" />
-                <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-gold/50">
-                  Placeholder
-                </p>
-                <p className="font-body text-xs text-sp-text-muted/50 leading-relaxed">
-                  Phone mockup<br />Aranypinty / Pesti6<br />hero screenshot
-                </p>
-              </div>
-            </motion.div>
-
-          </div>
+              Kérek egy ingyenes átnézést
+            </Link>
+            <Link
+              to="/munkak"
+              className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
+                         text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
+                         hover:text-sp-text hover:border-white/30 transition-all duration-200"
+            >
+              Munkáim megtekintése
+              <ArrowRight size={14} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
