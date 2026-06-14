@@ -1,158 +1,158 @@
-// Industry categories — single source of truth for the gallery filter,
-// the IndustryTabs section, project tags, and badge colors.
-// Add a new industry here and it flows through the whole site.
-export type ProjectCategory = 'hospitality' | 'hotel' | 'beauty' | 'health'
-
-export type FilterId = 'all' | ProjectCategory
-
-export interface Category {
-  id: FilterId
-  label: string
-}
-
-export const CATEGORIES: Category[] = [
-  { id: 'all', label: 'Összes' },
-  { id: 'hospitality', label: 'Vendéglátás' },
-  { id: 'hotel', label: 'Hotel' },
-  { id: 'health', label: 'Egészségügy' },
-  { id: 'beauty', label: 'Szépségipar' },
-]
-
-// Convenience lookup used by ProjectCard etc.
-export const categoryLabels: Record<FilterId, string> = CATEGORIES.reduce(
-  (acc, c) => ({ ...acc, [c.id]: c.label }),
-  {} as Record<FilterId, string>
-)
-
-// Singular label for a single project card's badge.
-export const categorySingular: Record<ProjectCategory, string> = {
-  hospitality: 'Vendéglátás',
-  hotel: 'Hotel',
-  beauty: 'Szépségipar',
-  health: 'Egészségügy',
-}
+export type Industry = 'hospitality' | 'hotel' | 'health' | 'beauty'
 
 export interface Project {
-  id: string
+  slug: string
   name: string
-  category: ProjectCategory
-  /** Overrides categorySingular on the featured card badge only */
-  badgeLabel?: string
-  /**
-   * TRUTH RULE: every project must carry an explicit status label on screen.
-   * 'concept' = Weboldal-koncepció / iparági bemutató (self-initiated demo)
-   * 'real'    = Valós projekt (confirmed paying client — only set when confirmed)
-   * Defaults to 'concept' if omitted so no project is ever unlabeled.
-   */
-  projectStatus?: 'concept' | 'real'
+  industry: Industry
+  industryLabel: string
   tagline: string
-  description: string
-  cel: string
-  mitJavit: string
+  summary: string
   tags: string[]
   gradient: string
   accentColor: string
   liveUrl?: string
-  /** Autoplay looping video preview shown inside the browser mockup (browser src, e.g. /portfolio/x.webm) */
   videoSrc?: string
-  /** Optional poster image for the video (browser src, e.g. /portfolio/x.webp) */
   posterSrc?: string
-  /** object-position of the preview video inside the mockup, e.g. '80% center' to focus right */
-  videoPosition?: string
-  /** object-fit of the preview video — 'cover' (default) or 'contain' (shows full frame) */
   videoFit?: 'cover' | 'contain'
-  featured?: boolean
-  comingSoon?: boolean
-  // Optional case-study narrative — rendered only on the large featured card.
-  caseStudy?: {
-    challenge: string // Kihívás
-    solution: string  // Megoldás
-    result: string    // Eredmény
+  /** Truth rule: all projects are concepts unless explicitly marked real */
+  status: 'concept' | 'real'
+  caseStudy: {
+    context: string      // Mi volt a cél?
+    direction: string    // Milyen irány készült?
+    conversion: string   // Hogyan vezeti a látogatót?
+    visual: string       // Hangulat, tipográfia, vizuális irány
   }
 }
 
 export const projects: Project[] = [
   {
-    id: 'ambrus-klinika',
+    slug: 'ambrus-dental-klinika',
     name: 'Ambrus Dental Klinika',
-    category: 'health',
-    badgeLabel: 'Fogászat',
-    tagline: 'Prémium fogászati weboldal, amely bizalmat épít és több időpontfoglalást támogat.',
-    description: 'Letisztult, nyugodt hangulatú fogászati weboldal, amely érthetően mutatja be a kezeléseket, csökkenti a páciens bizonytalanságát, és egyszerűbbé teszi az időpontkérést.',
-    cel: 'Több minőségi páciensmegkeresés és átláthatóbb kezelésbemutatás.',
-    mitJavit: 'Időpontfoglalás, bizalomépítés, kezelésbemutatás',
-    tags: ['Fogászat', 'Időpontfoglalás', 'Bizalomépítés', 'Prémium design'],
-    gradient: 'linear-gradient(135deg, #0a140a 0%, #18301a 40%, #7a9a501a 100%)',
+    industry: 'health',
+    industryLabel: 'Fogászat',
+    tagline: 'Prémium fogászati weboldal bizalomépítésre és időpontfoglalásra tervezve.',
+    summary: 'Letisztult, szakmai megjelenés, amely csökkenti a páciens bizonytalanságát és egyszerűvé teszi a kapcsolatfelvételt.',
+    tags: ['Fogászat', 'Időpontfoglalás', 'Bizalomépítés'],
+    gradient: 'linear-gradient(135deg, #0a140a 0%, #18301a 60%, #7a9a5008 100%)',
     accentColor: '#7a9a50',
-    featured: true,
+    status: 'concept',
     liveUrl: 'https://preeminent-strudel-958a61.netlify.app',
     videoSrc: '/portfolio/dental-clinic-preview-opt.mp4',
     videoFit: 'contain',
     caseStudy: {
-      challenge: 'A régi online jelenlét nem tükrözte a klinika szakmai színvonalát, és nem vezette elég egyértelműen a pácienseket az időpontfoglalásig.',
-      solution: 'Letisztult, bizalomépítő weboldal készült átlátható kezelésekkel, erős vizuális hierarchiával és egyértelmű foglalási útvonallal.',
-      result: 'Professzionálisabb első benyomás, könnyebb tájékozódás és gyorsabb kapcsolatfelvétel.',
+      context: 'A klinika szakmai színvonala és a régi online jelenlét között szakadék volt. A páciensek nem kaptak elég gyors, meggyőző választ az első találkozáson.',
+      direction: 'Letisztult, térmentes szerkezet. Kezelések egyértelműen csoportosítva. A csapat bemutatva — arc, tapasztalat, bizalom. Egyetlen elsődleges cél: időpontfoglalás.',
+      conversion: 'Minden oldal ugyanoda vezet: egyértelműen kitett foglalási gomb, minimális súrlódással. Nincs elveszett klikk, nincs felesleges oldal.',
+      visual: 'Meleg fehér, mély zöld akcent, sober talpas betű a fejlécekhez, tiszta sans-serif a tartalomhoz. Szakmai, de nem steril.',
     },
   },
   {
-    id: 'beauty-embassy',
+    slug: 'beauty-embassy',
     name: 'Beauty Embassy',
-    category: 'beauty',
-    badgeLabel: 'Szépségipar',
-    tagline: 'Prémium med-spa és szépségszalon, foglalás-központú megjelenéssel.',
-    description: 'Világos, elegáns szépségipari weboldal, amely a szolgáltatásokat, hangulatot és foglalási útvonalat egy prémium élménnyé rendezi.',
-    cel: 'Több időpontfoglalás és erősebb bizalomépítés.',
-    mitJavit: 'Időpontfoglalás, kezelésbemutatás, bizalomépítés',
-    tags: ['Szépségipar', 'Foglalás', 'Prémium arculat', 'Mobilnézet'],
-    gradient: 'linear-gradient(135deg, #160810 0%, #3a1830 40%, #c080a01a 100%)',
+    industry: 'beauty',
+    industryLabel: 'Szépségipar',
+    tagline: 'Elegáns szépségipari weboldal szolgáltatásokkal, portfólióval és foglalási útvonallal.',
+    summary: 'A vizuális minőség és a stílus egyszerre épít bizalmat és vezeti a vendéget a foglalásig.',
+    tags: ['Szépségipar', 'Prémium arculat', 'Online foglalás'],
+    gradient: 'linear-gradient(135deg, #160810 0%, #3a1830 60%, #c080a008 100%)',
     accentColor: '#c080a0',
+    status: 'concept',
     liveUrl: 'https://beauty-embassy.netlify.app',
     videoSrc: '/portfolio/beauty-salon-preview-opt.mp4',
     caseStudy: {
-      challenge: 'A szépségiparban a vendég a hangulat és a fotók alapján dönt — a korábbi megjelenés viszont nem közvetítette a stúdió színvonalát, és nehézkes volt eljutni a foglalásig.',
-      solution: 'Letisztult, világos, többoldalas oldal készült: kategóriánként rendezett kezelések, árak, galéria és minden oldalról egyértelmű foglalási útvonal.',
-      result: 'Igényesebb első benyomás, könnyebb tájékozódás a kezelések között és gyorsabb út az időpontfoglalásig.',
+      context: 'A vendég Instagramon találja meg a szalont, majd a weboldalon dönt. Ha a két felület minősége között rés van, a bizalom megtörik — és a vendég máshova megy.',
+      direction: 'Vizuálisan egységes világ az Instagrammal. Szolgáltatások kategóriánként, árakkal. Galéria, ami meggyőz. Foglalás, ami nem fáraszt.',
+      conversion: 'Az első képernyőtől a foglalás gombig minden döntés egy célt szolgál: minél kevesebb lépésben üzleti időpont.',
+      visual: 'Meleg krém, mélybordó és rózsaszín akcent, eleganciát sugárzó tipográfia. Nem divatos — időtlen.',
     },
   },
   {
-    id: 'hotel-aranyudvar',
+    slug: 'hotel-aranyudvar',
     name: 'Hotel Aranyudvar',
-    category: 'hotel',
-    tagline: 'Prémium hotel weboldal közvetlen foglalási fókuszszal',
-    description: 'Elegáns, atmoszférikus hotel weboldal, amely a szállás hangulatát, a szobákat és a közvetlen érdeklődést helyezi előtérbe.',
-    cel: 'Több direkt foglalás és kevesebb bizonytalanság.',
-    mitJavit: 'Közvetlen foglalás, szobabemutató, prémium pozicionálás',
-    tags: ['Hotel', 'Foglalás', 'Szobák', 'Élményalapú design'],
-    gradient: 'linear-gradient(135deg, #05101a 0%, #163050 40%, #5a9aba1a 100%)',
+    industry: 'hotel',
+    industryLabel: 'Hotel',
+    tagline: 'Prémium hotel weboldal közvetlen foglalási fókuszszal.',
+    summary: 'Atmoszferikus megjelenés, amely az élményt adja el — és a közvetlen foglalást könnyíti.',
+    tags: ['Hotel', 'Közvetlen foglalás', 'Élményalapú design'],
+    gradient: 'linear-gradient(135deg, #05101a 0%, #163050 60%, #5a9aba08 100%)',
     accentColor: '#5a9aba',
+    status: 'concept',
     videoSrc: '/portfolio/hotel-aranyudvar-preview2-opt.mp4',
+    caseStudy: {
+      context: 'A potenciális vendég egyszerre néz több szállást. A döntés ott születik, ahol hamarabb megérti az élményt és megtalálja a foglalási útvonalat.',
+      direction: 'Nagy, lélegző szobafotók. Az élmény a szöveg előtt. Csomagok, amelyek konkrét választ adnak a "miért érdemes ide jönni" kérdésre.',
+      conversion: 'Közvetlen foglalási link az első képernyőn. Nem az OTA — közvetlenül. Kevesebb közvetítő, több bevétel.',
+      visual: 'Mélykék, arany és ekrü. Elegáns, nem giccses. Szállodák legjobb fotóinak energiája.',
+    },
   },
   {
-    id: 'pesti6',
+    slug: 'pesti6',
     name: 'Pesti6',
-    category: 'hospitality',
+    industry: 'hospitality',
+    industryLabel: 'Vendéglátás',
     tagline: 'Modern magyar étterem Budapest szívében.',
-    description: 'Karakteres vendéglátóhely-weboldal, ahol a hangulat, kínálat, nyitvatartás és helyszín gyorsan megtalálható.',
-    cel: 'Gyorsabb döntés, több látogatás, erősebb márkaélmény.',
-    mitJavit: 'Asztalfoglalás, étlapbemutatás, hangulat',
-    tags: ['Vendéglátás', 'Étlap', 'Helyszín', 'Mobil'],
-    gradient: 'linear-gradient(135deg, #2a0d08 0%, #6e2412 40%, #c9a04c1a 100%)',
+    summary: 'Hangulat, kínálat, nyitvatartás és foglalás — azonnal, mobilon is.',
+    tags: ['Vendéglátás', 'Étlap', 'Asztalfoglalás'],
+    gradient: 'linear-gradient(135deg, #2a0d08 0%, #6e2412 60%, #c9a04c08 100%)',
     accentColor: '#b5482e',
+    status: 'concept',
     liveUrl: 'https://pesti6-demo.netlify.app',
     videoSrc: '/portfolio/pesti6-preview-opt.mp4',
+    caseStudy: {
+      context: 'Az új vendég útközben, telefonon keres rád. 20 másodperce van. Ha nem látja azonnal a menüt, nyitvatartást és hangulatot — továbblép.',
+      direction: 'Teli képernyős étteremhangulat az első másodpercben. Étlap egyetlen görgetéssel. Foglalás gomb mindig kézközelben.',
+      conversion: 'Minden oldalszakasz ugyanoda mutat: asztalfoglalás, helyszín, kapcsolatfelvétel. Nincs elveszett vendég.',
+      visual: 'Tégla, antracit és melegfehér. Magyar karakterű, de nem folklorisztikus. Komoly, étvágyat keltő.',
+    },
+  },
+]
+
+// Industry pages data
+export interface IndustryPage {
+  slug: string
+  label: string
+  headline: string
+  visitorQuestion: string
+  websiteJob: string
+  conversionPoint: string
+  relatedSlugs: string[]
+}
+
+export const industries: IndustryPage[] = [
+  {
+    slug: 'vendeltatas',
+    label: 'Vendéglátás',
+    headline: 'Vendéglátóhelyeknek, ahol az első benyomás dönt.',
+    visitorQuestion: 'Megtalálja a menüt, a nyitvatartást és a hangulatot pár másodperc alatt?',
+    websiteJob: 'Azonnal megmutatni a kínálatot, a helyszínt és a következő lépést — mobilon is.',
+    conversionPoint: 'Asztalfoglalás vagy kapcsolatfelvétel egy érintéssel.',
+    relatedSlugs: ['pesti6'],
   },
   {
-    id: 'kelet-kavenzo',
-    name: 'Kelet Kávézó és Galéria',
-    category: 'hospitality',
-    tagline: 'Kávézó és galéria, reggeltől estig',
-    description: 'Barátságos, étvágykeltő weboldal koncepció, amely gyorsan megmutatja, miért érdemes betérni vagy asztalt foglalni.',
-    cel: 'Könnyebb tájékozódás és több vendég.',
-    mitJavit: 'Hangulatbemutatás, bizalomépítés, vendégélmény kommunikáció',
-    tags: ['Kávézó', 'Étterem', 'Asztalfoglalás', 'Étlap'],
-    gradient: 'linear-gradient(135deg, #05101a 0%, #163050 40%, #c9a84c1a 100%)',
-    accentColor: '#5a9aba',
-    videoSrc: '/portfolio/hotel-kelet-preview-opt.mp4',
-    posterSrc: '/portfolio/hotel-kelet-poster.webp',
+    slug: 'hotel',
+    label: 'Hotel',
+    headline: 'Hoteleknek, ahol a foglalás az egyetlen mérőszám.',
+    visitorQuestion: 'Érti az élményt? Megtalálja a foglalás gombját? Miért jobb közvetlenül, mint OTA-n?',
+    websiteJob: 'Az élményt eladni — a foglalás útját minimalista egyértelműséggel felmutatni.',
+    conversionPoint: 'Közvetlen foglalás. Kevesebb közvetítő, több bevétel.',
+    relatedSlugs: ['hotel-aranyudvar'],
+  },
+  {
+    slug: 'egeszsegugy',
+    label: 'Egészségügy',
+    headline: 'Egészségügynek, ahol a bizalom az első lépés.',
+    visitorQuestion: 'Megbízható ez a rendelő? Kompetens az orvos? Hogyan kérek időpontot?',
+    websiteJob: 'Szakmaiságot és hitelt közvetíteni — és az időpontkérést egyetlen mozdulattal megoldani.',
+    conversionPoint: 'Egyszerű időpontfoglalás, félelem nélkül.',
+    relatedSlugs: ['ambrus-dental-klinika'],
+  },
+  {
+    slug: 'szepsegugy',
+    label: 'Szépségipar',
+    headline: 'Szépségszalonoknak, ahol a stílus épít bizalmat.',
+    visitorQuestion: 'A stílusa illik hozzám? Milyen a munka minősége? Hogyan foglalok?',
+    websiteJob: 'A vizuális minőséget és stílust egyből megmutatni — és az online foglalást egy lépéssé tenni.',
+    conversionPoint: 'Portfólió, árak és foglalás egy helyen.',
+    relatedSlugs: ['beauty-embassy'],
   },
 ]
