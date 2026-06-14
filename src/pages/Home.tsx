@@ -131,7 +131,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {homePreviews.map((project, i) => (
               <motion.div
                 key={project.slug}
@@ -140,9 +140,10 @@ export default function Home() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
+                className="rounded-2xl border border-white/8 bg-sp-bg overflow-hidden"
               >
                 {/* Video: plays in place, does NOT navigate */}
-                <div className="overflow-hidden rounded-2xl mb-5">
+                <div className="overflow-hidden">
                   <BrowserMockup
                     gradient={project.gradient}
                     accentColor={project.accentColor}
@@ -152,12 +153,13 @@ export default function Home() {
                     mode="secondary"
                     projectName={project.name}
                     videoFit={project.videoFit}
+                    className="rounded-none border-0"
                   />
                 </div>
                 {/* Text: navigates to case study */}
                 <Link
                   to={`/munkak/${project.slug}`}
-                  className="group flex items-start justify-between gap-4 mt-1 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3.5 hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200"
+                  className="group flex items-start justify-between gap-4 px-5 py-4 border-t border-white/8 hover:bg-white/[0.04] transition-colors duration-200"
                 >
                   <div>
                     <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-text-muted mb-1">
