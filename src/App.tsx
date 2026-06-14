@@ -8,7 +8,6 @@ import IndustryTabs from '@/components/IndustryTabs'
 import ResultsStrip from '@/components/ResultsStrip'
 import OfferBlock from '@/components/OfferBlock'
 import ProcessSection from '@/components/ProcessSection'
-import FaqSection from '@/components/FaqSection'
 import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 import MobileStickyBar from '@/components/MobileStickyBar'
@@ -42,9 +41,6 @@ export default function App() {
 
       {/* 8. Process */}
       <ProcessSection />
-
-      {/* 9. FAQ */}
-      <FaqSection />
 
       {/* 10. Contact / quote form — the former standalone "Dolgozzunk együtt"
           CTA (FinalCTA) is now baked into the top of this section. The
