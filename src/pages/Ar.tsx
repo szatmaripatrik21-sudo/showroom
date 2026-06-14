@@ -31,7 +31,7 @@ export default function Ar() {
               Árazás
             </span>
             <h1 className="font-display font-semibold text-6xl md:text-7xl lg:text-8xl text-gradient-gold leading-[0.93] max-w-3xl mb-8">
-              Akár 119.900 Ft-tól
+              Akár 119.000 Ft-tól
             </h1>
             <p className="font-body text-xl text-sp-text-muted max-w-lg leading-relaxed">
               Az ár a projekt méretétől, funkcióitól és tartalmi előkészítettségétől függ.
@@ -59,7 +59,7 @@ export default function Ar() {
                 Induló weboldal
               </span>
               <p className="font-display text-5xl md:text-6xl font-semibold text-gradient-gold mb-6 leading-none">
-                119.900 Ft
+                119.000 Ft
               </p>
               <p className="font-body text-base text-sp-text-muted mb-6 leading-relaxed">
                 Egyoldalas bemutatkozó oldal meglévő tartalom és képanyag esetén,
@@ -67,7 +67,7 @@ export default function Ar() {
               </p>
               <div className="border-t border-white/8 pt-6 mb-6">
                 <p className="font-body text-sm font-medium text-sp-text mb-3">A legtöbb projekt:</p>
-                <p className="font-display text-2xl text-sp-text">119.900–350.000 Ft</p>
+                <p className="font-display text-2xl text-sp-text">119.000–350.000 Ft</p>
               </div>
               <p className="font-body text-sm text-sp-text-muted/60 italic">
                 A pontos összeget az első egyeztetésen adjuk meg.
