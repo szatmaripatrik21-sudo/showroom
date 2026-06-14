@@ -17,7 +17,7 @@ export const site = {
     // Phone intentionally omitted — no number is invented or displayed.
     phone: '',
     location: 'Budapest',
-    responseTime: 'Átlagban 24 órán belül válaszolok',
+    responseTime: '24 órán belül válaszolok',
   },
 
   // Optional social links — left empty so no placeholder/fake profiles render.

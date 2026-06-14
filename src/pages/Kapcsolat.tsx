@@ -102,7 +102,7 @@ export default function Kapcsolat() {
               </div>
 
               <div className="border-t border-white/6 pt-8 space-y-2">
-                {['Átlagban 24 órán belül válaszolok', 'Nincs spam, nincs agresszív értékesítés', 'Csak akkor megyünk tovább, ha mindkét oldalnak van értelme'].map((t) => (
+                {['24 órán belül válaszolok', 'Nincs spam, nincs agresszív értékesítés', 'Csak akkor megyünk tovább, ha mindkét oldalnak van értelme'].map((t) => (
                   <p key={t} className="font-body text-sm text-sp-text-muted">{t}</p>
                 ))}
                 <p className="font-body text-sm text-sp-text-muted pt-2">

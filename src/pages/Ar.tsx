@@ -15,7 +15,7 @@ const drivers = [
 ]
 
 const trustNotes = [
-  'Átlagban 24 órán belül válaszolok',
+  '24 órán belül válaszolok',
   'Nincs kötelezettség',
   'Konkrét nagyságrend az első válaszban',
 ]
