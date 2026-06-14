@@ -141,7 +141,7 @@ export default function Work() {
                 </a>
               </div>
               <p className="font-body text-xs text-sp-text-muted/40 leading-relaxed">
-                Rövid válasz 24 órán belül · Nincs kötelezettség · Konkrét következő lépést kapsz
+                Nincs kötelezettség · Konkrét következő lépést kapsz
               </p>
             </motion.div>
 

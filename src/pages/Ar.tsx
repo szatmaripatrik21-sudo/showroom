@@ -15,7 +15,7 @@ const drivers = [
 ]
 
 const trustNotes = [
-  '24 órán belül válaszolok',
+  'Kötelezettségmentes első egyeztetés',
   'Nincs kötelezettség',
   'Konkrét nagyságrend az első válaszban',
 ]

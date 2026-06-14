@@ -83,7 +83,7 @@ export default function Ajanlat() {
                 </a>
               </div>
               <p className="font-body text-xs text-sp-text-muted/40 leading-relaxed">
-                Nincs kötelezettség · Rövid válasz 24 órán belül · Konkrét javaslatot kapsz
+                Nincs kötelezettség · Konkrét javaslatot kapsz
               </p>
             </motion.div>
 

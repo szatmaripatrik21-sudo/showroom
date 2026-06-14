@@ -289,7 +289,7 @@ export default function Folyamat() {
               </Link>
             </div>
             <p className="font-body text-xs text-sp-text-muted/40 leading-relaxed">
-              Nincs kötelezettség · Rövid válasz 24 órán belül · Egyértelmű következő lépést kapsz
+              Nincs kötelezettség · Egyértelmű következő lépést kapsz
             </p>
           </motion.div>
         </div>

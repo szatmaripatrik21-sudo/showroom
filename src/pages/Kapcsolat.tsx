@@ -85,7 +85,7 @@ export default function Kapcsolat() {
               <div className="space-y-6">
                 {[
                   { n: '1', t: 'Elküldöd a kérelmet', d: 'Néhány perc, nincs kötelezettség.' },
-                  { n: '2', t: '24 órán belül válaszolok', d: 'Megnézem a helyzetet, esetleg a meglévő weboldaladat is.' },
+                  { n: '2', t: 'Megnézem a helyzetedet', d: 'Átnézem a kérelmet, esetleg a meglévő weboldaladat is.' },
                   { n: '3', t: 'Jelzem a javasolt irányt', d: 'Konkrét visszajelzés — mi hiányzik, mit érdemes másképp.' },
                   { n: '4', t: 'Ha van értelme, ajánlat', d: 'Konkrét ár és menetrend — csak ha mindkét oldalnak van értelme.' },
                 ].map(({ n, t, d }) => (
@@ -102,7 +102,7 @@ export default function Kapcsolat() {
               </div>
 
               <div className="border-t border-white/6 pt-8 space-y-2">
-                {['24 órán belül válaszolok', 'Nincs spam, nincs agresszív értékesítés', 'Csak akkor megyünk tovább, ha mindkét oldalnak van értelme'].map((t) => (
+                {['Nincs spam, nincs agresszív értékesítés', 'Csak akkor megyünk tovább, ha mindkét oldalnak van értelme'].map((t) => (
                   <p key={t} className="font-body text-sm text-sp-text-muted">{t}</p>
                 ))}
                 <p className="font-body text-sm text-sp-text-muted pt-2">
@@ -129,7 +129,7 @@ export default function Kapcsolat() {
                   </div>
                   <h2 className="font-display text-2xl font-semibold text-sp-text">Köszönöm, megkaptam!</h2>
                   <p className="font-body text-base text-sp-text-muted max-w-sm leading-relaxed">
-                    24 órán belül visszajelzek a javasolt iránnyal és a lehetséges következő lépéssel.
+                    Hamarosan visszajelzek a javasolt iránnyal és a lehetséges következő lépéssel.
                   </p>
                 </div>
               ) : (
