@@ -76,7 +76,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="block mb-6 text-[10px] sm:text-xs tracking-[0.34em] uppercase font-body font-medium"
-            style={{ color: '#C9A15D', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+            style={{ color: '#E8B86D', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
           >
             SP. / ügyfélszerző weboldalak
           </motion.span>
@@ -90,7 +90,7 @@ export default function Home() {
               fontSize: 'clamp(2.1rem, 5.5vw, 4.25rem)',
               lineHeight: '0.98',
               letterSpacing: '-0.03em',
-              color: '#FFF8EE',
+              color: '#FFFFFF',
               textShadow: '0 4px 24px rgba(0,0,0,0.95)',
             }}
           >
@@ -106,7 +106,7 @@ export default function Home() {
               maxWidth: 'min(560px, 92vw)',
               fontSize: 'clamp(0.9375rem, 1.8vw, 1.1rem)',
               lineHeight: '1.55',
-              color: '#F0E6D8',
+              color: '#FAF3EA',
               textShadow: '0 3px 18px rgba(0,0,0,0.95)',
             }}
           >
@@ -139,9 +139,9 @@ export default function Home() {
             <Link
               to="/folyamat"
               className="inline-flex items-center gap-1.5 font-body font-medium transition-colors duration-200"
-              style={{ color: '#DED2C2', fontSize: '0.9375rem', textShadow: '0 2px 12px rgba(0,0,0,0.75)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#FFF8EE')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#DED2C2')}
+              style={{ color: '#F0E8DC', fontSize: '0.9375rem', textShadow: '0 2px 12px rgba(0,0,0,0.75)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#F0E8DC')}
             >
               Megnézem, hogyan működik <ArrowRight size={14} />
             </Link>
