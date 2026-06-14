@@ -13,37 +13,37 @@ const reveal: Variants = {
 
 const homePreviews = projects.filter(p => ['ambrus-dental-klinika', 'beauty-embassy'].includes(p.slug))
 
-const problemPoints = ['érthető ajánlat', 'gyors döntés', 'látható kapcsolatfelvétel']
+const problemPoints = ['kevés ajánlatkérés', 'elveszett érdeklődők', 'gyenge első benyomás']
 
 const whyCards = [
   {
-    title: 'Első benyomás',
-    text: 'Pár másodperc alatt eldől, hogy a vállalkozásod profinak, megbízhatónak és választásra érdemesnek tűnik-e.',
-    label: 'Cél: bizalom az első képernyőtől',
+    title: 'Több megkeresés és foglalás',
+    text: 'Az oldal célja, hogy az érdeklődőből valódi ügyfél legyen. Ajánlatkérés, foglalás, telefonhívás — a következő lépés mindig egyértelmű és elérhető.',
+    label: 'Cél: több megkeresés',
   },
   {
-    title: 'Tiszta ajánlat',
-    text: 'A látogató gyorsan értse, mivel foglalkozol, kinek segítesz, és miért érdemes nálad érdeklődnie.',
-    label: 'Cél: kevesebb bizonytalanság',
+    title: 'Bizalom az első másodpercektől',
+    text: 'A látogató pár másodperc alatt megítéli, megbízható-e a vállalkozás. A megjelenés és az egyértelmű üzenet ezt a döntést befolyásolja.',
+    label: 'Cél: erősebb első benyomás',
   },
   {
     title: 'Iparágra szabott felépítés',
-    text: 'Egy fogászat, hotel, étterem vagy szépségszalon más logika alapján győz meg. Az oldal szerkezete ehhez igazodik.',
-    label: 'Cél: relevánsabb oldalélmény',
+    text: 'Egy fogászat, hotel, étterem vagy szépségszalon más logika alapján győzi meg az érdeklődőt. Az oldal szerkezete ehhez igazodik.',
+    label: 'Cél: relevánsabb oldal',
   },
   {
-    title: 'Egyértelmű következő lépés',
-    text: 'Ajánlatkérés, időpontfoglalás, telefonhívás vagy üzenetküldés — a látogatónak mindig tudnia kell, mit tegyen.',
-    label: 'Cél: több megkeresés',
+    title: 'Kevesebb elveszett érdeklődő',
+    text: 'Sok vállalkozás veszít potenciális ügyfeleket, mert az oldal nem vezeti el őket a kapcsolatfelvételhez. Ezt az útvonalat tesszük egyértelművé.',
+    label: 'Cél: kisebb elvándorlás',
   },
 ]
 
 const offerPoints = [
-  'Stratégiai struktúra',
-  'Magyar piacra írt szöveg',
-  'Egyedi prémium vizuális irány',
-  'Mobilra optimalizált kivitelezés',
-  'Átadás utáni finomhangolás',
+  'Világos üzenet, amit azonnal megért a látogató',
+  'Bizalomépítő felépítés szolgáltató vállalkozásoknak',
+  'Mobilra optimalizált, gyors és letisztult megjelenés',
+  'Erős CTA-k több ajánlatkéréshez és foglaláshoz',
+  'Olyan struktúra, ami üzleti célt szolgál',
 ]
 
 export default function Home() {
@@ -62,21 +62,16 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="block mb-8 text-[10px] tracking-[0.38em] uppercase font-body font-medium text-sp-gold/70"
           >
-            SP. / webdesign
+            SP. / ügyfélszerző weboldalak
           </motion.span>
 
-          {/*
-            ALTERNATE HEADLINES (A/B — do not render):
-            "Weboldal, ami vendéget hoz, nem csak szépen mutat."
-            "A weboldala lehet, hogy épp vendégeket veszít Önnek."
-          */}
           <motion.h1
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
             className="font-display font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-sp-text max-w-xl mb-7"
           >
-            Olyan weboldal, ami miatt Önt választják, nem a konkurenciát.
+            Több megkeresés.<br />Több foglalás.<br />Több bevétel.
           </motion.h1>
 
           <motion.p
@@ -85,7 +80,9 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
             className="font-body text-base md:text-lg text-sp-text-muted max-w-md mb-10 leading-relaxed"
           >
-            Éttermeknek, szállodáknak, rendelőknek és szalonoknak építek weboldalt, ami nem csak igényes — foglalást és telefonhívást is hoz.
+            Olyan vállalkozói weboldalakat készítek éttermeknek, rendelőknek, szalonoknak
+            és szolgáltatóknak, amelyek bizalmat építenek, meggyőzik az érdeklődőket,
+            és több kapcsolatfelvételt hoznak.
           </motion.p>
 
           <motion.div
@@ -103,12 +100,12 @@ export default function Home() {
               Kérek egy ingyenes átnézést
             </Link>
             <Link
-              to="/munkak"
+              to="/folyamat"
               className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
                          text-sp-text-muted border border-white/15 rounded-full px-7 py-3.5
                          hover:text-sp-text hover:border-white/30 transition-all duration-200"
             >
-              Munkáim megtekintése
+              Megnézem, hogyan működik
               <ArrowRight size={14} />
             </Link>
           </motion.div>
@@ -125,11 +122,13 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-6 max-w-2xl">
-              A látogató nem vár.
+              A legtöbb weboldal nem rossz. Csak nem hoz elég ügyfelet.
             </h2>
             <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed mb-8">
-              Pár másodperc alatt eldönti, hogy marad-e. Ha nem érti az ajánlatod,
-              nem érzi a bizalmat, vagy nem találja a következő lépést — továbbmegy.
+              Sok vállalkozásnak van weboldala, mégis kevés az ajánlatkérés, a foglalás
+              vagy a telefonhívás. Ennek oka gyakran nem a szolgáltatás minősége, hanem
+              az, hogy az oldal nem épít elég bizalmat, nem vezeti az érdeklődőt, és nem
+              ad elég okot a kapcsolatfelvételre.
             </p>
             <div className="flex flex-wrap gap-3">
               {problemPoints.map((pt) => (
@@ -156,13 +155,13 @@ export default function Home() {
             className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 md:mb-16"
           >
             <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight">
-              Kiválasztott koncepciók.
+              Iparágra szabott megoldások.
             </h2>
             <Link
               to="/munkak"
               className="flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-gold transition-colors duration-200 shrink-0"
             >
-              Összes koncepció <ArrowRight size={14} />
+              Összes megoldás <ArrowRight size={14} />
             </Link>
           </motion.div>
 
@@ -219,7 +218,6 @@ export default function Home() {
       <section className="py-24 md:py-32 border-t border-white/6">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
 
-          {/* Section header: two-column */}
           <motion.div
             variants={reveal}
             initial="hidden"
@@ -228,28 +226,27 @@ export default function Home() {
             className="mb-14 md:mb-16"
           >
             <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
-              Miért működik
+              Miért hoz több ügyfelet
             </span>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-start">
               <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight">
-                Egy jó weboldal nem dísz. Ügyfeleket terel a következő lépés felé.
+                Nem csak oldalt készítek. Ügyfélszerző útvonalat építek.
               </h2>
               <div>
                 <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-7">
-                  A látogató nem elemzi a designodat. Érez valamit, ért valamit, majd dönt.
-                  Ezért az oldalnak egyszerre kell profi benyomást keltenie, gyorsan
-                  elmagyaráznia az ajánlatodat, és könnyűvé tennie a kapcsolatfelvételt.
+                  A cél, hogy az érdeklődő gyorsan megértse, miért Önt érdemes választania,
+                  lássa a bizalmi jeleket, választ kapjon a kérdéseire, és könnyen tudjon
+                  ajánlatot kérni, időpontot foglalni vagy felvenni a kapcsolatot.
                 </p>
                 <blockquote className="border-l-2 border-sp-gold/50 pl-5">
                   <p className="font-body text-base text-sp-text-muted/70 leading-relaxed italic">
-                    Ha a látogató bizonytalan, továbbáll. Ha érti, miért téged válasszon, lépni fog.
+                    Ha a látogató bizonytalan, továbbáll. Ha érti, miért Önt válassza, lépni fog.
                   </p>
                 </blockquote>
               </div>
             </div>
           </motion.div>
 
-          {/* 2×2 card grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/6 rounded-2xl overflow-hidden mb-12 md:mb-14">
             {whyCards.map(({ title, text, label }, i) => (
               <motion.div
@@ -268,7 +265,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Bottom CTA row */}
           <motion.div
             variants={reveal}
             initial="hidden"
@@ -277,22 +273,22 @@ export default function Home() {
             className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8"
           >
             <p className="font-body text-base text-sp-text-muted leading-relaxed max-w-sm">
-              Szeretnéd tudni, nálad melyik pont hiányzik most?
+              Szeretné tudni, hol veszít érdeklődőket a vállalkozása?
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0">
               <Link
                 to="/kapcsolat"
                 className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                           bg-sp-gold text-[#0a0908] rounded-full px-6 py-3
+                           bg-sp-gold text-sp-bg rounded-full px-6 py-3
                            hover:bg-sp-gold-hi transition-colors duration-200"
               >
-                Áttekintést kérek
+                Kérek egy ingyenes átnézést
               </Link>
               <Link
                 to="/munkak"
                 className="inline-flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-gold transition-colors duration-200"
               >
-                Koncepciók megtekintése <ArrowRight size={14} />
+                Megoldások megtekintése <ArrowRight size={14} />
               </Link>
             </div>
           </motion.div>
@@ -313,10 +309,11 @@ export default function Home() {
                 Az ajánlat
               </span>
               <h2 className="font-display font-semibold text-5xl md:text-6xl text-sp-text leading-tight mb-6">
-                Egy teljes weboldal-rendszer.
+                A weboldal, ami dolgozik a vállalkozásáért.
               </h2>
               <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-8">
-                Nem dizájn. Nem kód. Egy eszköz, amely a látogatót döntésre vezeti.
+                Nem csak dizájn és kód. Egy felépítés, amely meggyőzi az érdeklődőt,
+                elvezeti a kapcsolatfelvételhez, és üzleti célt szolgál.
               </p>
               <Link
                 to="/ajanlat"
@@ -355,14 +352,15 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <span className="block mb-6 text-[10px] tracking-[0.3em] uppercase font-body font-medium text-sp-gold">
-                Árazás
+                Befektetés
               </span>
               <h2 className="font-display font-semibold text-5xl md:text-6xl text-gradient-gold leading-tight mb-4">
                 Induló ár: 119.900 Ft
               </h2>
               <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-6 max-w-md">
-                A legtöbb projekt 119.900–350.000 Ft között készül el. Az első válaszban megadom
-                a reális nagyságrendet — kötelezettség nélkül.
+                Egy jól felépített weboldal segíthet abban, hogy több érdeklődőből
+                legyen valódi ügyfél. Az első válaszban megadom a reális nagyságrendet
+                — kötelezettség nélkül.
               </p>
               <Link
                 to="/ar"
@@ -385,19 +383,19 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-6">
-              Alakítsuk az első benyomást üzletté.
+              Kérjen ingyenes átnézést a vállalkozásáról.
             </h2>
             <p className="font-body text-lg text-sp-text-muted leading-relaxed mb-10 max-w-xl mx-auto">
-              Írd le röviden, mire van szükséged. Visszajelzek a javasolt iránnyal,
-              nagyságrenddel és következő lépéssel.
+              Írja le röviden, mivel foglalkozik és mi a célja. Visszajelzek a javasolt
+              iránnyal, a reális nagyságrenddel és a következő lépéssel.
             </p>
             <Link
               to="/kapcsolat"
               className="inline-flex items-center justify-center gap-2 font-body text-sm font-medium
-                         bg-sp-gold text-[#0a0908] rounded-full px-8 py-4
+                         bg-sp-gold text-sp-bg rounded-full px-8 py-4
                          hover:bg-sp-gold-hi transition-colors duration-200"
             >
-              Áttekintést kérek
+              Kérek egy ingyenes átnézést
             </Link>
           </motion.div>
         </div>

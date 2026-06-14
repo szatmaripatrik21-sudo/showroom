@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { site } from '@/config/site'
 
 const links = [
-  { label: 'Koncepciók', href: '/munkak' },
+  { label: 'Megoldások', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
   { label: 'Ár', href: '/ar' },

@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Főoldal', href: '/' },
-  { label: 'Koncepciók', href: '/munkak' },
+  { label: 'Megoldások', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
   { label: 'Ár', href: '/ar' },
