@@ -25,7 +25,7 @@ export default function CaseStudy() {
   const nextProject = projects[(projects.indexOf(project) + 1) % projects.length]
 
   return (
-    <>
+    <div key={slug}>
       {/* Back */}
       <div className="pt-24 pb-0">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -164,6 +164,6 @@ export default function CaseStudy() {
           </div>
         </Link>
       </section>
-    </>
+    </div>
   )
 }
