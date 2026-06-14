@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
+  { label: 'Főoldal', href: '/' },
   { label: 'Koncepciók', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
@@ -44,6 +45,7 @@ export default function Navbar() {
             <li key={link.href}>
               <NavLink
                 to={link.href}
+                end={link.href === '/'}
                 className={({ isActive }) =>
                   `font-body text-sm tracking-wide transition-colors duration-200 ${
                     isActive ? 'text-sp-text' : 'text-sp-text-muted hover:text-sp-text'
@@ -85,6 +87,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <NavLink
                   to={link.href}
+                  end={link.href === '/'}
                   className={({ isActive }) =>
                     `block py-4 font-body text-base transition-colors ${
                       isActive ? 'text-sp-text' : 'text-sp-text-muted'
