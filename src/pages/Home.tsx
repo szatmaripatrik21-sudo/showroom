@@ -141,38 +141,36 @@ export default function Home() {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                <Link to={`/munkak/${project.slug}`} className="group block">
-                  <div className="overflow-hidden rounded-2xl mb-5">
-                    <div className="transform group-hover:scale-[1.02] transition-transform duration-700 ease-out">
-                      <BrowserMockup
-                        gradient={project.gradient}
-                        accentColor={project.accentColor}
-                        videoSrc={project.videoSrc}
-                        posterSrc={project.posterSrc}
-                        videoId={project.slug}
-                        mode="secondary"
-                        projectName={project.name}
-                        videoFit={project.videoFit}
-                      />
-                    </div>
+                {/* Video: plays in place, does NOT navigate */}
+                <div className="overflow-hidden rounded-2xl mb-5">
+                  <BrowserMockup
+                    gradient={project.gradient}
+                    accentColor={project.accentColor}
+                    videoSrc={project.videoSrc}
+                    posterSrc={project.posterSrc}
+                    videoId={project.slug}
+                    mode="secondary"
+                    projectName={project.name}
+                    videoFit={project.videoFit}
+                  />
+                </div>
+                {/* Text: navigates to case study */}
+                <Link to={`/munkak/${project.slug}`} className="group flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-text-muted mb-1">
+                      {project.industryLabel} · Weboldal-koncepció
+                    </p>
+                    <h3 className="font-display text-2xl font-semibold text-sp-text group-hover:text-sp-gold transition-colors duration-200">
+                      {project.name}
+                    </h3>
+                    <p className="font-body text-sm text-sp-text-muted mt-1.5 leading-snug max-w-sm">
+                      {project.tagline}
+                    </p>
                   </div>
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sp-text-muted mb-1">
-                        {project.industryLabel} · Weboldal-koncepció
-                      </p>
-                      <h3 className="font-display text-2xl font-semibold text-sp-text group-hover:text-sp-gold transition-colors duration-200">
-                        {project.name}
-                      </h3>
-                      <p className="font-body text-sm text-sp-text-muted mt-1.5 leading-snug max-w-sm">
-                        {project.tagline}
-                      </p>
-                    </div>
-                    <ArrowRight
-                      size={18}
-                      className="text-sp-text-muted group-hover:text-sp-gold group-hover:translate-x-1 transition-all duration-200 shrink-0 mt-1"
-                    />
-                  </div>
+                  <ArrowRight
+                    size={18}
+                    className="text-sp-text-muted group-hover:text-sp-gold group-hover:translate-x-1 transition-all duration-200 shrink-0 mt-1"
+                  />
                 </Link>
               </motion.div>
             ))}
