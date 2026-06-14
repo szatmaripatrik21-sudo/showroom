@@ -100,8 +100,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SOLUTION ─────────────────────────────────────────────────────── */}
+      {/* ── PROBLEM ──────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-36 border-t border-white/6">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-8 max-w-2xl">
+              A látogató nem vár.
+            </h2>
+            <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed">
+              Pár másodperc alatt eldönti, hogy marad-e. Ha nem érti az ajánlatod,
+              nem érzi a minőséget, vagy nem találja a következő lépést — továbblép.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── SOLUTION ─────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.div
             variants={reveal}
@@ -138,26 +158,6 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── PROBLEM ──────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-36 border-t border-white/6 bg-sp-surface">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl text-sp-text leading-tight mb-8 max-w-2xl">
-              A látogató nem vár.
-            </h2>
-            <p className="font-body text-lg md:text-xl text-sp-text-muted max-w-xl leading-relaxed">
-              Pár másodperc alatt eldönti, hogy marad-e. Ha nem érti az ajánlatod,
-              nem érzi a minőséget, vagy nem találja a következő lépést — továbblép.
-            </p>
-          </motion.div>
         </div>
       </section>
 
