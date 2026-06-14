@@ -50,10 +50,14 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="p-6 flex flex-col flex-1 space-y-4">
         {/* Header */}
         <div>
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
             <Badge variant={categoryVariant[project.category]}>
               {categorySingular[project.category]}
             </Badge>
+            {/* Truth rule: always show real/concept status */}
+            <span className="text-[9px] tracking-[0.15em] uppercase font-body font-medium text-white/40 border border-white/12 rounded-full px-2 py-0.5">
+              {project.projectStatus === 'real' ? 'Valós projekt' : 'Weboldal-koncepció'}
+            </span>
             {project.comingSoon && (
               <Badge variant="outline" className="text-lux-muted text-[10px]">Hamarosan</Badge>
             )}

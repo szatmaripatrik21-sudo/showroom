@@ -61,13 +61,17 @@ export default function FeaturedProjectCard({ project }: { project: Project }) {
 
           {/* Header */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
               <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold">
                 Kiemelt munka
               </span>
               <Badge variant={categoryVariant[project.category]}>
                 {project.badgeLabel ?? categorySingular[project.category]}
               </Badge>
+              {/* Truth rule: always show real/concept status */}
+              <span className="text-[9px] tracking-[0.15em] uppercase font-body font-medium text-white/45 border border-white/15 rounded-full px-2 py-0.5">
+                {project.projectStatus === 'real' ? 'Valós projekt' : 'Weboldal-koncepció'}
+              </span>
             </div>
             <h3 className="font-display text-3xl md:text-4xl font-semibold text-lux-cream leading-tight">
               {project.name}

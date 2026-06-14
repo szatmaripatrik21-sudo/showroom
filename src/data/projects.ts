@@ -38,6 +38,13 @@ export interface Project {
   category: ProjectCategory
   /** Overrides categorySingular on the featured card badge only */
   badgeLabel?: string
+  /**
+   * TRUTH RULE: every project must carry an explicit status label on screen.
+   * 'concept' = Weboldal-koncepció / iparági bemutató (self-initiated demo)
+   * 'real'    = Valós projekt (confirmed paying client — only set when confirmed)
+   * Defaults to 'concept' if omitted so no project is ever unlabeled.
+   */
+  projectStatus?: 'concept' | 'real'
   tagline: string
   description: string
   cel: string

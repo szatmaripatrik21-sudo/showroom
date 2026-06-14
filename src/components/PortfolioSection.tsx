@@ -27,14 +27,14 @@ export default function PortfolioSection() {
         >
           <div>
             <span className="text-[10px] tracking-[0.25em] uppercase font-body font-medium text-lux-gold block mb-5">
-              Weboldal-koncepciók
+              Kiválasztott munkák
             </span>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-lux-cream font-semibold leading-tight">
-              Iparágra szabott weboldal-koncepciók.
+              Weboldal-koncepciók iparágonként.
             </h2>
             <p className="mt-4 font-body text-sm md:text-base text-lux-cream-dim/85 max-w-xl leading-relaxed">
-              Nem sablonokat mutatok, hanem üzleti helyzetekre épített weboldalakat: foglalásra,
-              ajánlatkérésre, bizalomépítésre és szolgáltatás-bemutatásra tervezve.
+              Minden bemutatott oldal iparági bemutató — a döntési logikát, struktúrát és
+              vizuális irányt mutatja egy-egy konkrét helyzetben.
             </p>
           </div>
 
