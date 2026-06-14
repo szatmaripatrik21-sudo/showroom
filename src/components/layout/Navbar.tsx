@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
+  { label: 'Főoldal', href: '/' },
   { label: 'Koncepciók', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
@@ -20,88 +21,82 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => { setOpen(false) }, [location.pathname])
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#0a0908]/90 backdrop-blur-xl border-b border-white/6' : ''
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
+        scrolled
+          ? 'bg-[#080604]/80 backdrop-blur-[18px] border-white/10'
+          : 'bg-[#080604]/72 backdrop-blur-[18px] border-white/6'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-        {/* Logo + Főoldal */}
-        <div className="hidden lg:flex items-center gap-8">
+      {/* Desktop: 3-zone grid */}
+      <div className="hidden lg:grid max-w-[1240px] mx-auto px-8 h-[72px]"
+           style={{ gridTemplateColumns: '1fr auto 1fr' }}>
+
+        {/* Left: logo */}
+        <div className="flex items-center">
           <Link
             to="/"
             className="font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
           >
             SP<span className="text-sp-gold">.</span>
           </Link>
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `font-body text-sm tracking-wide transition-colors duration-200 ${
-                isActive ? 'text-sp-text' : 'text-sp-text-muted hover:text-sp-text'
-              }`
-            }
-          >
-            Főoldal
-          </NavLink>
         </div>
 
-        {/* Logo only on mobile */}
+        {/* Center: nav links */}
+        <nav className="flex items-center gap-8">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.href}
+              to={link.href}
+              end={link.href === '/'}
+              className={({ isActive }) =>
+                `font-body text-sm tracking-wide transition-colors duration-200 ${
+                  isActive ? 'text-sp-text' : 'text-sp-text-muted hover:text-sp-text'
+                }`
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Right: CTA */}
+        <div className="flex items-center justify-end">
+          <Link
+            to="/kapcsolat"
+            className="font-body text-sm font-medium text-sp-gold
+                       border border-sp-gold/40 rounded-full px-5 py-2
+                       hover:bg-sp-gold/8 hover:border-sp-gold/70
+                       transition-all duration-200"
+          >
+            Áttekintést kérek
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile: logo + burger */}
+      <div className="lg:hidden flex items-center justify-between max-w-[1240px] mx-auto px-6 h-16">
         <Link
           to="/"
-          className="lg:hidden font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
+          className="font-display text-xl font-semibold text-sp-text tracking-wide hover:text-sp-gold transition-colors duration-200"
         >
           SP<span className="text-sp-gold">.</span>
         </Link>
-
-        {/* Desktop nav */}
-        <ul className="hidden lg:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <NavLink
-                to={link.href}
-                end={link.href === '/'}
-                className={({ isActive }) =>
-                  `font-body text-sm tracking-wide transition-colors duration-200 ${
-                    isActive ? 'text-sp-text' : 'text-sp-text-muted hover:text-sp-text'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-
-        {/* Desktop CTA */}
-        <Link
-          to="/kapcsolat"
-          className="hidden lg:inline-flex items-center font-body text-sm font-medium text-sp-gold
-                     border border-sp-gold/40 rounded-full px-5 py-2
-                     hover:bg-sp-gold/8 hover:border-sp-gold/70
-                     transition-all duration-200"
-        >
-          Áttekintést kérek
-        </Link>
-
-        {/* Mobile burger */}
         <button
-          className="lg:hidden text-sp-text hover:text-sp-gold transition-colors p-1"
+          className="text-sp-text hover:text-sp-gold transition-colors p-1"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Menü bezárása' : 'Menü megnyitása'}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu panel */}
       {open && (
-        <div className="lg:hidden bg-[#0a0908]/96 backdrop-blur-xl border-b border-white/6 px-6 pb-8 pt-2">
+        <div className="lg:hidden bg-[#080604]/96 backdrop-blur-xl border-t border-white/6 px-6 pb-8 pt-2">
           <ul className="flex flex-col divide-y divide-white/6">
             {navLinks.map((link) => (
               <li key={link.href}>
