@@ -5,19 +5,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        'lux-black': '#0a0908',
-        'lux-dark': '#110d09',
-        'lux-brown': '#1e1610',
-        'lux-brown-mid': '#2a1f16',
-        'lux-gold': '#c9a84c',
+        // ── lux-* primitives (keep for backwards compat with existing components) ──
+        'lux-black':      '#0a0908',
+        'lux-dark':       '#110d09',
+        'lux-brown':      '#1e1610',
+        'lux-brown-mid':  '#2a1f16',
+        'lux-gold':       '#c9a84c',
         'lux-gold-light': '#e8c96a',
-        'lux-gold-dim': '#956f28',
-        'lux-cream': '#f0ebe0',
-        'lux-cream-dim': '#c8bfb0',
-        'lux-orange': '#d06a32',
-        /* Lifted from #7a6e60 for legible body/sub copy on the near-black bg. */
-        'lux-muted': '#9c8f7d',
+        'lux-gold-dim':   '#956f28',
+        'lux-cream':      '#f0ebe0',
+        'lux-cream-dim':  '#c8bfb0',
+        'lux-orange':     '#d06a32',
+        'lux-muted':      '#9c8f7d',
         'lux-muted-soft': '#857a6b',
+        // ── sp-* semantic token layer ────────────────────────────────────────────
+        // New components consume these; old ones keep lux-* until the polish phase.
+        // Color roles:
+        'sp-bg':          '#0a0908',  // page background
+        'sp-surface':     '#110d09',  // card / raised section
+        'sp-surface-hi':  '#1e1610',  // 3rd-level elevation
+        'sp-text':        '#f0ebe0',  // primary body text
+        'sp-text-muted':  '#9c8f7d',  // secondary / caption text
+        'sp-text-dim':    '#c8bfb0',  // dimmed / placeholder
+        // Gold = hierarchy & decision signal ONLY — not decoration
+        'sp-gold':        '#c9a84c',  // primary gold (CTAs, key labels)
+        'sp-gold-hi':     '#e8c96a',  // hover / active
+        'sp-gold-lo':     '#956f28',  // subtle / background hints
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -12,7 +12,7 @@ export default function OfferBlock() {
   const [includesOpen, setIncludesOpen] = useState(false)
 
   return (
-    <section className="border-t border-white/6 py-12 md:py-20 lg:py-36 bg-lux-dark">
+    <section id="ajanlat" className="border-t border-white/6 py-12 md:py-20 lg:py-36 bg-lux-dark">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <motion.div

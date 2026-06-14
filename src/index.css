@@ -80,6 +80,41 @@
   }
 }
 
+/* ── SP component utility layer ───────────────────────────────────────────────
+   Canonical structural classes for new section shells (Phase 1 token contract).
+   Existing components keep their inline classes until the Phase 9 polish pass.
+   ─────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  /* Section wrapper — consistent vertical rhythm + top divider.
+     border-white/6 can't be used in @apply (JIT opacity modifier),
+     so the border is declared as raw CSS. */
+  .sp-section {
+    @apply py-12 md:py-20 lg:py-36;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  /* Max-width content container */
+  .sp-container {
+    @apply max-w-7xl mx-auto px-6 md:px-10;
+  }
+  /* Section header block (eyebrow + h2 + optional intro) */
+  .sp-section-header {
+    @apply max-w-3xl mb-8 md:mb-14;
+  }
+  /* Eyebrow label — gold, small-caps, only on key hierarchy moments */
+  .sp-eyebrow {
+    @apply block mb-5 font-body text-[10px] tracking-[0.25em] uppercase font-medium text-sp-gold;
+  }
+  /* Section headline — display serif, responsive scale */
+  .sp-h2 {
+    @apply font-display font-semibold leading-tight
+           text-3xl sm:text-4xl md:text-5xl text-sp-text;
+  }
+  /* Body copy */
+  .sp-body {
+    @apply font-body text-sm md:text-base leading-relaxed text-sp-text-muted;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up,
   .animate-fade-in-down,

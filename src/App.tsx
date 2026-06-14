@@ -1,57 +1,75 @@
 import { MotionConfig } from 'framer-motion'
 import Navbar from '@/components/Navbar'
+
+// ── Sections in IA order (Phase 1 skeleton) ─────────────────────────────────
+// 1. Hero
 import HeroSection from '@/components/HeroSection'
-import HeroSocialProof from '@/components/HeroSocialProof'
-import PortfolioSection from '@/components/PortfolioSection'
+// 2. Problem — stub, content in Phase 3
+import ProblemSection from '@/components/ProblemSection'
+// 3. Business value — current SolutionSection content, rewritten in Phase 3
 import SolutionSection from '@/components/SolutionSection'
+// 4. Industry logic — reframed in Phase 4
 import IndustryTabs from '@/components/IndustryTabs'
-import ResultsStrip from '@/components/ResultsStrip'
+// 5. Selected work — real/concept labels added in Phase 5
+import PortfolioSection from '@/components/PortfolioSection'
+// 6. SP method — stub, content in Phase 6
+import MethodSection from '@/components/MethodSection'
+// 7. Offer package — restructured in Phase 6
 import OfferBlock from '@/components/OfferBlock'
+// 8. Process — refined in Phase 7
 import ProcessSection from '@/components/ProcessSection'
+// 9. Pricing logic — stub, content in Phase 7
+import PricingSection from '@/components/PricingSection'
+// 10. Final CTA + form — refined in Phase 8
 import ContactSection from '@/components/ContactSection'
+// ─────────────────────────────────────────────────────────────────────────────
+
 import Footer from '@/components/Footer'
 import MobileStickyBar from '@/components/MobileStickyBar'
+
+// Retired sections (not rendered):
+//   HeroSocialProof — was disabled (ENABLED=false); no real content to migrate
+//   ResultsStrip    — self-declared benchmarks; Truth rule prevents carrying forward
 
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen bg-lux-black text-lux-cream">
-      <Navbar />
+      <div className="min-h-screen bg-sp-bg text-sp-text">
+        <Navbar />
 
-      {/* 1. Hero */}
-      <HeroSection />
+        {/* 1. Hero */}
+        <HeroSection />
 
-      {/* 2. Social-proof strip — flagged off until real content exists */}
-      <HeroSocialProof />
+        {/* 2. Problem */}
+        <ProblemSection />
 
-      {/* 3. Gallery — the one filterable gallery, Aurum as the big featured card */}
-      <PortfolioSection />
+        {/* 3. Business value */}
+        <SolutionSection />
 
-      {/* 4. Why-me feature grid (4 cards) + cost-of-inaction beat */}
-      <SolutionSection />
+        {/* 4. Industry logic */}
+        <IndustryTabs />
 
-      {/* 5. Industries — merged "tailored to you" section */}
-      <IndustryTabs />
+        {/* 5. Selected work */}
+        <PortfolioSection />
 
-      {/* 6. Results */}
-      <ResultsStrip />
+        {/* 6. SP method */}
+        <MethodSection />
 
-      {/* 7. Pricing */}
-      <OfferBlock />
+        {/* 7. Offer package */}
+        <OfferBlock />
 
-      {/* 8. Process */}
-      <ProcessSection />
+        {/* 8. Process */}
+        <ProcessSection />
 
-      {/* 10. Contact / quote form — the former standalone "Dolgozzunk együtt"
-          CTA (FinalCTA) is now baked into the top of this section. The
-          FinalCTA component file is kept but unimported pending sign-off. */}
-      <ContactSection />
+        {/* 9. Pricing logic */}
+        <PricingSection />
 
-      <Footer />
+        {/* 10. Final CTA + form */}
+        <ContactSection />
 
-      {/* Persistent mobile CTA */}
-      <MobileStickyBar />
-    </div>
+        <Footer />
+        <MobileStickyBar />
+      </div>
     </MotionConfig>
   )
 }

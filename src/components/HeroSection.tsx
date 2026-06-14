@@ -12,7 +12,7 @@ const valuePoints = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-[100svh] overflow-hidden bg-lux-black">
+    <section id="hero" className="relative w-full min-h-[100svh] overflow-hidden bg-lux-black">
       {/* ─── Animated background — absolutely positioned, no layout height ───── */}
       <HeroAnimation />
 
