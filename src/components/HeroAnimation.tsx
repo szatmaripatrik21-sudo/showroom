@@ -108,14 +108,51 @@ export default function HeroAnimation() {
 
     const resizeAndMaybeRepaint = () => {
       resize()
-      if (prefersReducedMotion) renderFrame(0) // keep the paused frame correct after resize
+      if (prefersReducedMotion) renderFrame(0)
+    }
+
+    // Debounce resize so mobile browser-chrome collapse/expand doesn't
+    // reset the canvas mid-scroll (which causes a visible flash of black).
+    let resizeTimer: number | null = null
+    const debouncedResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer)
+      resizeTimer = window.setTimeout(resizeAndMaybeRepaint, 200)
     }
 
     resizeAndMaybeRepaint()
-    window.addEventListener('resize', resizeAndMaybeRepaint)
+    window.addEventListener('resize', debouncedResize)
 
     if (prefersReducedMotion) {
       renderFrame(0) // paused: one frame, no loop
+    } else if (isMobile) {
+      // On mobile: pause the shader while the finger is actively scrolling so
+      // the GPU isn't competing with scroll compositing, causing scroll jank.
+      let isScrolling = false
+      let scrollTimer: number | null = null
+      const onScroll = () => {
+        isScrolling = true
+        if (scrollTimer) window.clearTimeout(scrollTimer)
+        scrollTimer = window.setTimeout(() => { isScrolling = false }, 150)
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
+
+      const loop = (now: number) => {
+        rafRef.current = requestAnimationFrame(loop)
+        if (isScrolling) return
+        renderFrame(now * 1e-3)
+      }
+      rafRef.current = requestAnimationFrame(loop)
+
+      return () => {
+        window.removeEventListener('resize', debouncedResize)
+        window.removeEventListener('scroll', onScroll)
+        if (rafRef.current) cancelAnimationFrame(rafRef.current)
+        if (resizeTimer) window.clearTimeout(resizeTimer)
+        if (scrollTimer) window.clearTimeout(scrollTimer)
+        gl.deleteProgram(program)
+        gl.deleteShader(vs)
+        gl.deleteShader(fs)
+      }
     } else {
       const loop = (now: number) => {
         renderFrame(now * 1e-3)
@@ -125,8 +162,9 @@ export default function HeroAnimation() {
     }
 
     return () => {
-      window.removeEventListener('resize', resizeAndMaybeRepaint)
+      window.removeEventListener('resize', debouncedResize)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      if (resizeTimer) window.clearTimeout(resizeTimer)
       gl.deleteProgram(program)
       gl.deleteShader(vs)
       gl.deleteShader(fs)
@@ -143,7 +181,7 @@ export default function HeroAnimation() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 z-0 w-full h-full touch-none"
-      style={{ background: '#0a0908' }}
+      style={{ background: '#0a0908', willChange: 'transform' }}
     />
   )
 }
