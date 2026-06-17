@@ -53,11 +53,13 @@ export default function BrowserMockup({
 
   const [inView, setInView] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isStarting, setIsStarting] = useState(false)
   const [hasFrame, setHasFrame] = useState(false) // a still or live frame is ready to show
   const [frameRatio, setFrameRatio] = useState('16/9')
   const [autoplayOk] = useState(autoplayAllowed)
   const [controlsVisible, setControlsVisible] = useState(false) // pause hint auto-hides
   const hideTimerRef = useRef<number | null>(null)
+  const startTimerRef = useRef<number | null>(null)
 
   const isActive = activeId === videoId
 
@@ -73,6 +75,7 @@ export default function BrowserMockup({
     setControlsVisible(false)
   }, [])
   useEffect(() => () => { if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current) }, [])
+  useEffect(() => () => { if (startTimerRef.current) window.clearTimeout(startTimerRef.current) }, [])
 
   // Attach the file's src lazily. `eager` → preload the whole clip (featured /
   // a user-initiated play); otherwise just metadata so a still frame renders.
@@ -96,26 +99,25 @@ export default function BrowserMockup({
 
   const startPlayback = useCallback(() => {
     const v = videoRef.current
-    if (!v || !videoSrc) return
+    if (!v || !videoSrc || isStarting) return
     attachSrc(true)
-    requestPlay(videoId) // claim the single slot — pauses every other player
-    // `isPlaying` is driven by the element's real play/pause events (onPlay/
-    // onPause below), never by this promise — so the play overlay can never get
-    // stuck on top of a clip that is actually playing, even if play() rejects
-    // after being interrupted by a concurrent pause.
-    const played = v.play()
-    if (played && typeof played.catch === 'function') {
-      played.catch(() => {
-        // Genuinely blocked (e.g. data-saver autoplay): only yield the slot if
-        // the element truly didn't start. An interrupted-but-playing clip keeps
-        // the slot and stays correct via onPlay.
-        if (v.paused) release(videoId)
-      })
-    }
-  }, [videoSrc, videoId, attachSrc, requestPlay, release])
+    setIsStarting(true)
+    startTimerRef.current = window.setTimeout(() => {
+      setIsStarting(false)
+      requestPlay(videoId)
+      const played = v.play()
+      if (played && typeof played.catch === 'function') {
+        played.catch(() => {
+          if (v.paused) release(videoId)
+        })
+      }
+    }, 1000)
+  }, [videoSrc, videoId, attachSrc, requestPlay, release, isStarting])
 
   const pausePlayback = useCallback(
     (releaseSlot: boolean) => {
+      if (startTimerRef.current) { window.clearTimeout(startTimerRef.current); startTimerRef.current = null }
+      setIsStarting(false)
       const v = videoRef.current
       if (v && !v.paused) v.pause()
       setIsPlaying(false)
@@ -196,7 +198,7 @@ export default function BrowserMockup({
   // Play affordance: secondary always (until it plays); featured only as a
   // graceful fallback when autoplay didn't start (blocked / data-saver).
   const showPlay =
-    !isPlaying &&
+    (!isPlaying || isStarting) &&
     (mode === 'secondary' || (mode === 'featured' && inView && activeId === null))
 
   const showVideo = !!videoSrc
@@ -269,19 +271,22 @@ export default function BrowserMockup({
           {showPlay && (
             <button
               type="button"
-              onClick={startPlayback}
+              onClick={isStarting ? undefined : startPlayback}
               aria-label={`Videó lejátszása: ${projectName}`}
               className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-lux-gold/70 focus-visible:ring-inset"
             >
-              <span className="flex items-center justify-center w-16 h-16 rounded-full bg-black/45 backdrop-blur-md border border-lux-gold/40 text-lux-gold shadow-lg shadow-black/40 transition-all duration-300 group-hover/media:scale-105 group-hover/media:bg-black/60 group-hover/media:border-lux-gold/70 motion-reduce:transition-none">
+              <span className={`relative flex items-center justify-center w-16 h-16 rounded-full bg-black/45 backdrop-blur-md border text-lux-gold shadow-lg shadow-black/40 transition-all duration-300 motion-reduce:transition-none ${isStarting ? 'border-lux-gold/70 scale-105' : 'border-lux-gold/40 group-hover/media:scale-105 group-hover/media:bg-black/60 group-hover/media:border-lux-gold/70'}`}>
+                {isStarting && (
+                  <span className="absolute inset-0 rounded-full border-2 border-lux-gold/60 animate-ping" />
+                )}
                 <Play size={22} className="ml-0.5" fill="currentColor" />
               </span>
               <span className="flex flex-col items-center gap-0.5">
                 <span className="font-body text-sm font-medium text-lux-cream tracking-wide">
-                  Lejátszás
+                  {isStarting ? 'Betöltés…' : 'Lejátszás'}
                 </span>
                 <span className="font-body text-[10px] tracking-[0.18em] uppercase text-white/55">
-                  Kattints a demó megtekintéséhez
+                  {isStarting ? '' : 'Kattints a demó megtekintéséhez'}
                 </span>
               </span>
             </button>

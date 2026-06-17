@@ -48,7 +48,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'beauty-embassy',
-    name: 'Beauty Embassy',
+    name: 'Beauty Essence',
     industry: 'beauty',
     industryLabel: 'Szépségipar',
     tagline: 'Szépségipari weboldal, amely kiemeli a szolgáltatásokat, erősíti a prémium érzetet és foglalásra vezet.',

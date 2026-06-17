@@ -57,7 +57,9 @@ export default function HeroAnimation() {
     const gl = canvas.getContext('webgl2')
     if (!gl) return
 
-    const dpr = Math.max(1, 0.5 * window.devicePixelRatio)
+    const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches
+    const dpr = isMobile ? 1.0 : Math.max(1, 0.5 * window.devicePixelRatio)
+    const targetInterval = isMobile ? 1000 / 24 : 0 // 24 fps on mobile, uncapped on desktop
 
     const resize = () => {
       canvas.width = window.innerWidth * dpr
@@ -116,9 +118,12 @@ export default function HeroAnimation() {
     if (prefersReducedMotion) {
       renderFrame(0) // paused: one frame, no loop
     } else {
+      let lastRender = 0
       const loop = (now: number) => {
-        renderFrame(now * 1e-3)
         rafRef.current = requestAnimationFrame(loop)
+        if (targetInterval > 0 && now - lastRender < targetInterval) return
+        lastRender = now
+        renderFrame(now * 1e-3)
       }
       rafRef.current = requestAnimationFrame(loop)
     }
