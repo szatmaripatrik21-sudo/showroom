@@ -293,7 +293,7 @@ export default function Home() {
               onClick={() => scrollCarousel(1)}
               tabIndex={canScrollRight ? 0 : -1}
               className={[
-                'group hidden lg:block',
+                'group hidden sm:block',
                 'absolute right-0 top-0 bottom-0 z-20',
                 'cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-sp-gold/50',
                 'transition-opacity duration-300 ease-out',
