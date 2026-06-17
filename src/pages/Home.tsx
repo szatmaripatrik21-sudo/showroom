@@ -341,7 +341,7 @@ export default function Home() {
                 gap-3 sm:gap-6: tighter gap on mobile (more peek), standard on desktop */}
             <div
               ref={scrollRef}
-              className="no-scrollbar flex gap-6 overflow-x-auto pl-6 sm:pl-0 pr-16 sm:pr-0 scroll-pl-6 sm:scroll-pl-0"
+              className="no-scrollbar flex gap-6 overflow-x-auto pl-6 sm:pl-0 pr-16 sm:pr-0 scroll-pl-6 sm:scroll-pl-0 touch-pan-x"
               style={{ scrollSnapType: 'x mandatory', scrollBehavior: 'smooth' }}
             >
               {projects.map((project, i) => (
