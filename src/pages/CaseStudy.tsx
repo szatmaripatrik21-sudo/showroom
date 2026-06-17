@@ -122,7 +122,7 @@ export default function CaseStudy() {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body text-sm text-sp-text-muted hover:text-sp-text transition-colors duration-200"
+              className="inline-flex items-center gap-2 font-body text-sm font-medium border border-sp-gold text-sp-gold rounded-full px-5 py-2.5 hover:bg-sp-gold hover:text-[#0a0908] transition-all duration-200"
             >
               Weboldal megtekintése <ExternalLink size={13} />
             </a>

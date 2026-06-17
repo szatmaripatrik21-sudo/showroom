@@ -9,7 +9,7 @@
 export const site = {
   brand: 'SP',
   brandDot: '.',
-  positioning: 'Ügyfélszerző weboldalak éttermeknek, szállodáknak, rendelőknek és szalonoknak.',
+  positioning: 'Ügyfélszerző weboldalak vállalkozásoknak.',
 
   contact: {
     // Real address used for the form's mailto fallback + footer link.

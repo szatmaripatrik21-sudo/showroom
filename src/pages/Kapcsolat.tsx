@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 import { site } from '@/config/site'
+
+type ContactPath = 'existing-site' | 'no-site' | null
 
 import type { Variants } from 'framer-motion'
 const reveal: Variants = {
@@ -24,7 +27,33 @@ const EMPTY: FormState = { nev: '', email: '', businessType: '', currentUrl: '',
 const inputClass =
   'w-full rounded-xl bg-sp-surface border border-white/10 px-4 py-3.5 font-body text-sm text-sp-text placeholder:text-sp-text-muted/40 transition-all duration-200 focus:outline-none focus:border-sp-gold/50 focus:ring-1 focus:ring-sp-gold/20'
 
+const pathCopy: Record<NonNullable<ContactPath>, { h1: string; intro: string; submit: string; urlLabel: string }> = {
+  'existing-site': {
+    h1: 'Ingyenes weboldal-audit',
+    intro: 'Küldd el a weboldalad linkjét és röviden írd le a célodat. Megnézem, hol veszíted el az érdeklődőket és mit lehetne javítani.',
+    submit: 'Ingyenes auditot kérek',
+    urlLabel: 'Jelenlegi weboldal URL *',
+  },
+  'no-site': {
+    h1: 'Ingyenes konzultáció',
+    intro: 'Írd le röviden, mivel foglalkozik a vállalkozásod és mi a célod. Segítek meghatározni, milyen weboldal lenne ideális — kötelezettség nélkül.',
+    submit: 'Ingyenes konzultációt kérek',
+    urlLabel: 'Van már valamilyen online jelenléted? (opcionális)',
+  },
+}
+
+const defaultCopy = {
+  h1: 'Kérj egy rövid weboldal-áttekintést.',
+  intro: 'Írd le röviden, mire van szükséged. Visszajelzek a javasolt iránnyal, nagyságrenddel és következő lépéssel.',
+  submit: 'Elküldöm az áttekintési kérelmet',
+  urlLabel: 'Jelenlegi weboldal URL',
+}
+
 export default function Kapcsolat() {
+  const location = useLocation()
+  const contactPath = (location.state as { path?: ContactPath } | null)?.path ?? null
+  const copy = contactPath ? pathCopy[contactPath] : defaultCopy
+
   const [form, setForm] = useState<FormState>(EMPTY)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [submitted, setSubmitted] = useState(false)
@@ -59,11 +88,10 @@ export default function Kapcsolat() {
               Kapcsolat
             </span>
             <h1 className="font-display font-semibold text-6xl md:text-7xl lg:text-8xl text-sp-text leading-[0.93] max-w-3xl mb-8">
-              Kérj egy rövid weboldal-áttekintést.
+              {copy.h1}
             </h1>
             <p className="font-body text-xl text-sp-text-muted max-w-lg leading-relaxed">
-              Írd le röviden, mire van szükséged. Visszajelzek a javasolt iránnyal,
-              nagyságrenddel és következő lépéssel.
+              {copy.intro}
             </p>
           </motion.div>
         </div>
@@ -156,7 +184,7 @@ export default function Kapcsolat() {
                       placeholder="Pl. étterem, fogászat, hotel" />
                   </Field>
 
-                  <Field label="Jelenlegi weboldal URL">
+                  <Field label={copy.urlLabel}>
                     <input id="currentUrl" type="text" inputMode="url" value={form.currentUrl}
                       onChange={(e) => set('currentUrl', e.target.value)}
                       className={inputClass}
@@ -182,7 +210,7 @@ export default function Kapcsolat() {
                     className="w-full font-body text-sm font-medium bg-sp-gold text-[#0a0908] rounded-full px-7 py-4
                                hover:bg-sp-gold-hi transition-colors duration-200"
                   >
-                    Elküldöm az áttekintési kérelmet
+                    {copy.submit}
                   </button>
 
                   <p className="font-body text-xs text-sp-text-muted/50 text-center">

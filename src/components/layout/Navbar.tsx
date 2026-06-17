@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Főoldal', href: '/' },
-  { label: 'Megoldások', href: '/munkak' },
+  { label: 'Demók', href: '/munkak' },
   { label: 'Ajánlat', href: '/ajanlat' },
   { label: 'Folyamat', href: '/folyamat' },
   { label: 'Ár', href: '/ar' },
@@ -72,7 +72,7 @@ export default function Navbar() {
                        hover:bg-sp-gold/8 hover:border-sp-gold/70
                        transition-all duration-200"
           >
-            Áttekintést kérek
+            Ingyenes auditot kérek
           </Link>
         </div>
       </div>
@@ -120,7 +120,7 @@ export default function Navbar() {
                        border border-sp-gold/40 rounded-full px-5 py-3
                        hover:bg-sp-gold/8 transition-all duration-200"
           >
-            Áttekintést kérek
+            Ingyenes auditot kérek
           </Link>
         </div>
       )}

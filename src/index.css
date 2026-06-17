@@ -53,6 +53,16 @@
 }
 
 @layer utilities {
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Responsive carousel card widths.
+     Mobile: card = viewport - left-margin(24px) - gap(24px) - peek(32px) = 100vw - 80px.
+     The peek is ~32 px, matching the 24 px content margin on the other side.
+     sm+: 2-up; lg+: 3-up — unchanged. */
+  .carousel-card { flex: none; width: calc(100vw - 80px); scroll-snap-align: start; }
+  @media (min-width: 640px)  { .carousel-card { width: calc(50% - 12px); } }
+  @media (min-width: 1024px) { .carousel-card { width: calc(33.333% - 16px); } }
   .animation-delay-200 { animation-delay: 0.2s; }
   .animation-delay-400 { animation-delay: 0.4s; }
   .animation-delay-600 { animation-delay: 0.6s; }

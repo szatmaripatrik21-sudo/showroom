@@ -21,7 +21,7 @@ export default function Footer() {
               SP<span className="text-sp-gold">.</span>
             </Link>
             <p className="font-body text-sm text-sp-text-muted">
-              Prémium weboldalak vállalkozásoknak
+              Ügyfélszerző weboldalak vállalkozásoknak
             </p>
           </div>
 
